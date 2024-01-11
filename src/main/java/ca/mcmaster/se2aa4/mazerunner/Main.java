@@ -11,10 +11,10 @@ public class Main {
     private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
-        System.out.println("** Starting Maze Runner");
+        logger.info("** Starting Maze Runner");
         try {
-            System.out.println("**** Reading the maze from file " + args[0]);
-            BufferedReader reader = new BufferedReader(new FileReader(args[0]));
+            logger.info("**** Reading the maze from file " + args[0] + " " + args[1]);
+            BufferedReader reader = new BufferedReader(new FileReader(args[1]));
             String line;
             while ((line = reader.readLine()) != null) {
                 for (int idx = 0; idx < line.length(); idx++) {
@@ -26,11 +26,11 @@ public class Main {
                 }
                 System.out.print(System.lineSeparator());
             }
-        } catch(Exception e) {
-            System.err.println("/!\\ An error has occured /!\\");
+        } catch (Exception e) {
+            logger.error("/!\\ An error has occured /!\\");
         }
-        System.out.println("**** Computing path");
-        System.out.println("PATH NOT COMPUTED");
-        System.out.println("** End of MazeRunner");
+        logger.info("**** Computing path");
+        logger.info("PATH NOT COMPUTED");
+        logger.info("** End of MazeRunner");
     }
 }
