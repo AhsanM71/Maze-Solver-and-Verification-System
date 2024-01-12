@@ -21,7 +21,6 @@ public class Main {
         logger.info("** Starting Maze Runner");
         Options options = new Options();
         options.addOption("i", true, "flag type");
-        options.addOption("path", true, "file path");
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(options, args);
