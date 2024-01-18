@@ -40,53 +40,55 @@ public class Main {
         // } catch (Exception e) {
         // logger.error("/!\\ An error has occured /!\\");
         // }
-        new Main().getPath(args);
+        Configuration config = new Configuration();
+        config.getPath(args);
         logger.info("**** Computing path");
         logger.info("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
     }
 
-    private void getPath(String[] args) {
-        logger.info("** Start of Maze Runner");
-        Options options = generateOptions("i", "input", true, "Reading flag type");
-        CommandLineParser parser = new DefaultParser();
-        try {
-            CommandLine cmd = parser.parse(options, args);
-            String path = cmd.getOptionValue("i", "input");
-            readMaze(path);
-        } catch (Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
-        }
+    // private void getPath(String[] args) {
+    // logger.info("** Start of Maze Runner");
+    // Options options = generateOptions("i", "input", true, "Reading flag type");
+    // CommandLineParser parser = new DefaultParser();
+    // try {
+    // CommandLine cmd = parser.parse(options, args);
+    // String path = cmd.getOptionValue("i", "input");
+    // readMaze(path);
+    // } catch (Exception e) {
+    // logger.error("/!\\ An error has occured /!\\");
+    // }
 
-    }
+    // }
 
-    private Options generateOptions(String opt, String longOpt, boolean hasArgu, String message) {
-        Options options = new Options();
-        options.addOption(opt, longOpt, hasArgu, message);
-        return options;
-    }
+    // private Options generateOptions(String opt, String longOpt, boolean hasArgu,
+    // String message) {
+    // Options options = new Options();
+    // options.addOption(opt, longOpt, hasArgu, message);
+    // return options;
+    // }
 
-    private void readMaze(String path) {
-        try {
-            logger.info("**** Reading the maze from file " + path);
-            BufferedReader reader = new BufferedReader(new FileReader(path));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                printMaze(line);
-            }
-        } catch (Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
-        }
-    }
+    // private void readMaze(String path) {
+    // try {
+    // logger.info("**** Reading the maze from file " + path);
+    // BufferedReader reader = new BufferedReader(new FileReader(path));
+    // String line;
+    // while ((line = reader.readLine()) != null) {
+    // printMaze(line);
+    // }
+    // } catch (Exception e) {
+    // logger.error("/!\\ An error has occured /!\\");
+    // }
+    // }
 
-    private void printMaze(String line) {
-        for (int idx = 0; idx < line.length(); idx++) {
-            if (line.charAt(idx) == '#') {
-                System.out.print("WALL ");
-            } else if (line.charAt(idx) == ' ') {
-                System.out.print("PASS ");
-            }
-        }
-        System.out.print(System.lineSeparator());
-    }
+    // private void printMaze(String line) {
+    // for (int idx = 0; idx < line.length(); idx++) {
+    // if (line.charAt(idx) == '#') {
+    // System.out.print("WALL ");
+    // } else if (line.charAt(idx) == ' ') {
+    // System.out.print("PASS ");
+    // }
+    // }
+    // System.out.print(System.lineSeparator());
+    // }
 }
