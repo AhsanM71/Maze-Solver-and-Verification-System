@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 public class Configuration {
     private static final Logger logger = LogManager.getLogger();
 
-    public void getPath(String[] args) {
+    public void print(String[] args) {
         logger.info("** Start of Maze Runner");
         Options options = generateOptions("i", "input", true, "Reading flag type");
         CommandLineParser parser = new DefaultParser();
@@ -27,13 +27,26 @@ public class Configuration {
 
     }
 
+    public String getPath(String[] args) {
+        String path = "";
+        Options options = generateOptions("i", "input", true, "Reading flag type");
+        CommandLineParser parser = new DefaultParser();
+        try {
+            CommandLine cmd = parser.parse(options, args);
+            path = cmd.getOptionValue("i", "input");
+        } catch (Exception e) {
+            logger.error("/!\\ An error has occured /!\\");
+        }
+        return path;
+    }
+
     public Options generateOptions(String opt, String longOpt, boolean hasArgu, String message) {
         Options options = new Options();
         options.addOption(opt, longOpt, hasArgu, message);
         return options;
     }
 
-    public void readMaze(String path) {
+    private void readMaze(String path) {
         try {
             logger.info("**** Reading the maze from file " + path);
             BufferedReader reader = new BufferedReader(new FileReader(path));
@@ -46,7 +59,7 @@ public class Configuration {
         }
     }
 
-    public void printMaze(String line) {
+    private void printMaze(String line) {
         for (int idx = 0; idx < line.length(); idx++) {
             if (line.charAt(idx) == '#') {
                 System.out.print("WALL ");

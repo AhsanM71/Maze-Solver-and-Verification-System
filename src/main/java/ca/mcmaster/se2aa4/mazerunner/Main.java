@@ -41,8 +41,11 @@ public class Main {
         // logger.error("/!\\ An error has occured /!\\");
         // }
         Configuration config = new Configuration();
-        config.getPath(args);
+        String path = config.getPath(args);
+        Maze maze = new Maze(path);
+        // config.print(args);
         logger.info("**** Computing path");
+
         logger.info("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
     }
