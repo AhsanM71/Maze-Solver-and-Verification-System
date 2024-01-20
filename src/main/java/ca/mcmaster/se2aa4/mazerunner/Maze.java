@@ -61,6 +61,6 @@ public class Maze {
     // This method will check if at a certain row or col does there exist a valid
     // path
     public boolean isPathValid(int row, int col) {
-        return false;
+        return maze[row][col] == ' ';
     }
 }
