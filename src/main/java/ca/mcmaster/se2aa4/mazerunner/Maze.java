@@ -45,12 +45,12 @@ public class Maze {
     // Delete this method and where it's called later, currently using it for
     // testing!!!!!!
     public void print2DArr(char[][] maze) {
-        for (int i = 0; i < maze.length; i++) {
-            for (int j = 0; j < maze[0].length; j++) {
-                System.out.print(maze[i][j] + " ");
-            }
-            System.out.println();
-        }
+        // for (int i = 0; i < maze.length; i++) {
+        // for (int j = 0; j < maze[0].length; j++) {
+        // System.out.print(maze[i][j] + " ");
+        // }
+        // System.out.println();
+        // }
     }
 
     // This method checks if at a certain row and col does there exist a wall
@@ -60,7 +60,7 @@ public class Maze {
 
     // This method will check if at a certain row or col does there exist a valid
     // path
-    public boolean isPathValid(int row, int col) {
+    public boolean isPathValid(int col, int row) {
         return maze[row][col] == ' ';
     }
 }
