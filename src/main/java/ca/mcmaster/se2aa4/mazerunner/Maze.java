@@ -29,7 +29,7 @@ public class Maze {
                 loadMaze(line, count, maze);
                 count++;
             }
-            // print2DArr(maze);
+            print2DArr(maze);
         } catch (Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
@@ -41,14 +41,14 @@ public class Maze {
         }
     }
 
-    // public void print2DArr(char[][] maze) {
-    // for (int i = 0; i < maze.length; i++) {
-    // for (int j = 0; j < maze[0].length; j++) {
-    // System.out.print(maze[i][j] + " ");
-    // }
-    // System.out.println();
-    // }
-    // }
+    public void print2DArr(char[][] maze) {
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[0].length; j++) {
+                System.out.print(maze[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
 
     // This method checks if at a certain row and col does there exist a wall
     public boolean isWall(int row, int col) {
