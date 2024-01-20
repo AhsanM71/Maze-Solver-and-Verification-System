@@ -68,7 +68,18 @@ public class FindPathAlgo {
         return curr;
     }
 
-    public boolean verifyGivenPath(String path) {
-        return false;
+    public boolean verifyGivenPath(Maze maze, String path) {
+        Position start = maze.findStartPos();
+        Position end = maze.findEndPos();
+        Position curr = start;
+        for (int i = 0; i < path.length(); i++) {
+            if (path.charAt(i) == 'F') {
+                if (!maze.isPathValid(start.getXVal(), start.getYVal())) {
+                    return false;
+                }
+                curr = updatePos(curr, curr.getXVal() + 1, curr.getYVal());
+            }
+        }
+        return curr.getXVal() == end.getXVal() && curr.getYVal() == end.getYVal();
     }
 }

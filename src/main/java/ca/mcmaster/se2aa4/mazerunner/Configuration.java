@@ -7,6 +7,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +16,8 @@ public class Configuration {
 
     public void print(String[] args) {
         logger.info("** Start of Maze Runner");
-        Options options = generateOptions("i", "input", true, "Reading flag type");
+        Options options = new Options();
+        options = options.addOption("i", "input", true, "Reading flag type");
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(options, args);
@@ -30,7 +32,7 @@ public class Configuration {
     public String getPath(String[] args) {
         String path = "";
         Options optionsI = new Options();
-        optionsI = generateOptions("i", "input", true, "Reading flag type");
+        optionsI = optionsI.addOption("i", "input", true, "Reading flag type");
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(optionsI, args);
@@ -41,24 +43,20 @@ public class Configuration {
         return path;
     }
 
-    public String getUserPath(String[] args) {
-        String userAns = "";
-        Options optionsP = new Options();
-        optionsP = generateOptions("p", "path", true, "Reading flag type");
+    public String[] getUserPath(String[] args) {
+        String[] argu = new String[2];
+        Options options = new Options();
+        options.addOption("i", "input", true, "Reading file path");
+        options.addOption("p", true, "Reading user inputted path");
         CommandLineParser parser = new DefaultParser();
         try {
-            CommandLine cmd = parser.parse(optionsP, args);
-            userAns = cmd.getOptionValue("p", "path");
-        } catch (Exception e) {
-
+            CommandLine cmd = parser.parse(options, args);
+            argu[0] = cmd.getOptionValue("i", "-1");
+            argu[1] = cmd.getOptionValue("p", "-1");
+        } catch (ParseException pe) {
+            logger.error("An error has occurred");
         }
-        return userAns;
-    }
-
-    public Options generateOptions(String opt, String longOpt, boolean hasArgu, String message) {
-        Options options = new Options();
-        options.addOption(opt, longOpt, hasArgu, message);
-        return options;
+        return argu;
     }
 
     private void readMaze(String path) {
