@@ -8,6 +8,7 @@ import org.apache.commons.cli.ParseException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Arrays;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,13 +21,15 @@ public class Main {
         Configuration config = new Configuration();
 
         String path = config.getPath(args);
-        String userAns = config.getUserPath(args);
+        String[] userAns = config.getUserPath(args);
+        FindPathAlgo algo = new FindPathAlgo();
 
-        if (userAns == "") {
-            Maze maze = new Maze(path);
+        // System.out.println(userAns[0]);
+        // System.out.println(userAns[1]);
+        // System.out.println(path);
+        if (userAns[1].equals("-1")) {
             // config.print(args);
-
-            FindPathAlgo algo = new FindPathAlgo();
+            Maze maze = new Maze(path);
             String ans = algo.findPath(maze);
             if (algo.isPath()) {
                 logger.info("**** Computing path");
@@ -37,7 +40,9 @@ public class Main {
 
             logger.info("** End of MazeRunner");
         } else {
-            System.out.println(userAns);
+            Maze maze = new Maze(userAns[0]);
+            Boolean flag = algo.verifyGivenPath(maze, userAns[1]);
+            System.out.println(flag);
         }
 
     }

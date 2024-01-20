@@ -30,7 +30,7 @@ public class Maze {
                 loadMaze(line, count, maze);
                 count++;
             }
-            print2DArr(maze);
+            // print2DArr(maze);
         } catch (Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
@@ -83,4 +83,5 @@ public class Maze {
         }
         return null;
     }
+
 }
