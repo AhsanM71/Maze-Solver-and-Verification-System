@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 public class Maze {
 
     private char[][] maze;
-    private static final Logger logger = LogManager.getLogger();
+    private final Logger logger = LogManager.getLogger();
 
     // This method will read the file and store the maze in a 2D matrix
     public Maze(String fileName) {
@@ -45,16 +45,16 @@ public class Maze {
     // Delete this method and where it's called later, currently using it for
     // testing!!!!!!
     public void print2DArr(char[][] maze) {
-        // for (int i = 0; i < maze.length; i++) {
-        // for (int j = 0; j < maze[0].length; j++) {
-        // System.out.print(maze[i][j] + " ");
-        // }
-        // System.out.println();
-        // }
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[0].length; j++) {
+                System.out.print(maze[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
     // This method checks if at a certain row and col does there exist a wall
-    public boolean isWall(int row, int col) {
+    public boolean isWall(int col, int row) {
         return maze[row][col] == '#';
     }
 
@@ -62,5 +62,25 @@ public class Maze {
     // path
     public boolean isPathValid(int col, int row) {
         return maze[row][col] == ' ';
+    }
+
+    public Position findStartPos() {
+        int col = maze[0].length;
+        for (int i = 0; i < col; i++) {
+            if (isPathValid(0, i)) {
+                return new Position(0, i);
+            }
+        }
+        return null;
+    }
+
+    public Position findEndPos() {
+        int col = maze[0].length;
+        for (int i = 0; i < col; i++) {
+            if (isPathValid(col - 1, i)) {
+                return new Position(col - 1, i);
+            }
+        }
+        return null;
     }
 }

@@ -29,15 +29,28 @@ public class Configuration {
 
     public String getPath(String[] args) {
         String path = "";
-        Options options = generateOptions("i", "input", true, "Reading flag type");
+        Options optionsI = new Options();
+        optionsI = generateOptions("i", "input", true, "Reading flag type");
         CommandLineParser parser = new DefaultParser();
         try {
-            CommandLine cmd = parser.parse(options, args);
+            CommandLine cmd = parser.parse(optionsI, args);
             path = cmd.getOptionValue("i", "input");
         } catch (Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
         }
         return path;
+    }
+
+    public String getUserPath(String[] args) {
+        String userAns = "";
+        Options optionsP = new Options();
+        optionsP = generateOptions("p", "path", true, "Reading flag type");
+        CommandLineParser parser = new DefaultParser();
+        try {
+            CommandLine cmd = parser.parse(optionsP, args);
+            userAns = cmd.getOptionValue("p", "path");
+        } catch (Exception e) {
+        }
+        return userAns;
     }
 
     public Options generateOptions(String opt, String longOpt, boolean hasArgu, String message) {

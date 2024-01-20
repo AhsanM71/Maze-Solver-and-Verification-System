@@ -10,9 +10,16 @@ public class FindPathAlgo {
     // it will determine the start and end positions of any given maze.
 
     // Ask if I should determine the start and end position in 2 different methods?
-    public String findPath() {
+    public String findPath(Maze maze) {
+        Position start = null;
+        Position end = null;
 
-        return null;
+        start = maze.findStartPos();
+        end = maze.findEndPos();
+
+        String ans = pathAlgoirthm(maze, start, end);
+
+        return ans;
     }
 
     // This method will return the path of the maze, it has the parameters of maze,
@@ -46,7 +53,6 @@ public class FindPathAlgo {
         for (int i = 0; i < dir.size(); i++) {
             ans += dir.get(i);
         }
-
         return ans;
     }
 
