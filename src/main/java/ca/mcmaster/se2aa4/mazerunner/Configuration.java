@@ -36,6 +36,7 @@ public class Configuration {
             CommandLine cmd = parser.parse(optionsI, args);
             path = cmd.getOptionValue("i", "input");
         } catch (Exception e) {
+
         }
         return path;
     }
@@ -49,6 +50,7 @@ public class Configuration {
             CommandLine cmd = parser.parse(optionsP, args);
             userAns = cmd.getOptionValue("p", "path");
         } catch (Exception e) {
+
         }
         return userAns;
     }
