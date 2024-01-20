@@ -46,6 +46,11 @@ public class Main {
         // config.print(args);
         logger.info("**** Computing path");
 
+        Position start = new Position(0, 2);
+        Position end = new Position(10, 5);
+        FindPathAlgo algo = new FindPathAlgo();
+        algo.pathAlgoirthm(maze, start, end);
+
         logger.info("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
     }

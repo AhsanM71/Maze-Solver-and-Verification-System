@@ -15,6 +15,7 @@ public class FindPathAlgo {
     // This method will return the path of the maze, it has the parameters of maze,
     // start position and end position
     public String pathAlgoirthm(Maze maze, Position start, Position end) {
+
         return null;
     }
 
