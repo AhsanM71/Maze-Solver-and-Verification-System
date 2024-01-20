@@ -43,15 +43,18 @@ public class Main {
         Configuration config = new Configuration();
         String path = config.getPath(args);
         Maze maze = new Maze(path);
-        // config.print(args);
-        logger.info("**** Computing path");
+        config.print(args);
 
         Position start = new Position(0, 2);
-        Position end = new Position(10, 5);
+        Position end = new Position(4, 2);
         FindPathAlgo algo = new FindPathAlgo();
-        algo.pathAlgoirthm(maze, start, end);
-
-        logger.info("PATH NOT COMPUTED");
+        String ans = algo.pathAlgoirthm(maze, start, end);
+        if (algo.isPath()) {
+            logger.info("**** Computing path");
+            System.out.println(ans);
+        } else {
+            logger.info("PATH NOT COMPUTED");
+        }
         logger.info("** End of MazeRunner");
     }
 
