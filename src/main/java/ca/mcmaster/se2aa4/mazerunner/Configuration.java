@@ -31,32 +31,59 @@ public class Configuration {
 
     public String getPath(String[] args) {
         String path = "";
+        String userPath = "";
         Options optionsI = new Options();
         optionsI = optionsI.addOption("i", "input", true, "Reading flag type");
+        optionsI.addOption("p", true, "Reading user inputted path");
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(optionsI, args);
             path = cmd.getOptionValue("i", "input");
+            userPath = cmd.getOptionValue("p");
         } catch (Exception e) {
-
+            logger.error("An error has occurred");
         }
         return path;
     }
 
-    public String[] getUserPath(String[] args) {
-        String[] argu = new String[2];
+    public String getUserPath(String[] args) {
+        String path = "";
+        String userPath = "";
         Options options = new Options();
         options.addOption("i", "input", true, "Reading file path");
         options.addOption("p", true, "Reading user inputted path");
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(options, args);
-            argu[0] = cmd.getOptionValue("i", "-1");
-            argu[1] = cmd.getOptionValue("p", "-1");
+            path = cmd.getOptionValue("i", "-1");
+            userPath = cmd.getOptionValue("p");
         } catch (ParseException pe) {
             logger.error("An error has occurred");
         }
-        return argu;
+        if (userPath != null) {
+            String ans = formatStr(userPath);
+            return ans;
+        }
+        return userPath;
+    }
+
+    private String formatStr(String conv) {
+        String str = conv.replaceAll(" ", "");
+        String newStr = "";
+        for (int i = 0; i < str.length() - 1; i++) {
+            char c = str.charAt(i);
+            if (Character.isDigit(c)) {
+                int num = Character.getNumericValue(c);
+                char c2 = str.charAt(i + 1);
+                for (int j = 0; j < num; j++) {
+                    newStr += c2;
+                }
+                i += 1;
+            } else {
+                newStr += c;
+            }
+        }
+        return newStr;
     }
 
     private void readMaze(String path) {

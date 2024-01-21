@@ -19,12 +19,11 @@ public class Main {
 
     public static void main(String[] args) {
         Configuration config = new Configuration();
-
         String path = config.getPath(args);
-        String[] userAns = config.getUserPath(args);
+        String userAns = config.getUserPath(args);
         FindPathAlgo algo = new FindPathAlgo();
 
-        if (userAns[1].equals("-1")) {
+        if (userAns == null) {
             // config.print(args);
             Maze maze = new Maze(path);
             String[] ans = algo.mazeSolver(maze);
@@ -38,8 +37,9 @@ public class Main {
 
             logger.info("** End of MazeRunner");
         } else {
-            Maze maze = new Maze(userAns[0]);
-            Boolean flag = algo.verifyGivenPath(maze, userAns[1]);
+            System.out.println(path);
+            Maze maze = new Maze(path);
+            Boolean flag = algo.verifyGivenPath(maze, userAns);
             System.out.println(flag);
         }
 
