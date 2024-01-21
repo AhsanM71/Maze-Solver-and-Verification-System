@@ -72,7 +72,6 @@ public class Maze {
         return null;
     }
 
-    // Creating this method for debugging, delete afterwards!!!
     public int getMazeRSize() {
         return maze.length;
     }
@@ -81,6 +80,7 @@ public class Maze {
         return maze[0].length;
     }
 
+    // Creating this method for debugging, delete afterwards!!!
     public char[][] getMaze() {
         return maze;
     }
