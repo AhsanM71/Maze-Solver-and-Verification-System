@@ -12,24 +12,29 @@ public class Runner {
         this.col = col;
         this.endRow = endRow;
         this.endCol = endCol;
+        this.dir = dir;
     }
 
     public boolean checkForward(Maze maze) {
         int newRow = row + dir.getChangeRow();
         int newCol = col + dir.getChangeCol();
-        return newRow >= 0 && newRow <= 10 && newCol >= 0 && newCol <= 10 && maze.isPathValid(newCol, newRow);
+        return newRow >= 0 && newRow < maze.getMazeRSize() && newCol >= 0 && newCol < maze.getMazeCSize()
+                && maze.isPathValid(newCol, newRow);
     }
 
-    public void moveF() {
+    public void moveF(char[][] maze) {
         row += dir.getChangeRow();
         col += dir.getChangeCol();
+        // delete this afer!!!!!
+        maze[row][col] = 'X';
     }
 
     public boolean checkRight(Maze maze) {
         Direction rightTurn = dir.getRightDir();
         int newRow = row + rightTurn.getChangeRow();
         int newCol = col + rightTurn.getChangeCol();
-        return newRow >= 0 && newRow <= 10 && newCol >= 0 && newCol <= 10 && maze.isPathValid(newCol, newRow);
+        return newRow >= 0 && newRow < maze.getMazeRSize() && newCol >= 0 && newCol < maze.getMazeCSize()
+                && maze.isPathValid(newCol, newRow);
     }
 
     public void turnRight() {
@@ -38,6 +43,31 @@ public class Runner {
 
     public void turnLeft() {
         dir = dir.getLeftDir();
+    }
+
+    public boolean isExitReached() {
+        return row == endRow && col == endCol;
+    }
+
+    // delete these 2 methods later!!!!!!!!!!!!
+    public char[][] copyMaze(Maze maze) {
+        char[][] temp = maze.getMaze();
+        char[][] copy = new char[temp.length][temp[0].length];
+        for (int i = 0; i < temp.length; i++) {
+            for (int j = 0; j < temp[0].length; j++) {
+                copy[i][j] = temp[i][j];
+            }
+        }
+        return copy;
+    }
+
+    public void printMaze(char[][] maze) {
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[0].length; j++) {
+                System.out.print(maze[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
 
