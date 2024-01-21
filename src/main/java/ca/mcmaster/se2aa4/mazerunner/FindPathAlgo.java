@@ -17,6 +17,8 @@ public class FindPathAlgo {
         start = maze.findStartPos();
         end = maze.findEndPos();
 
+        Runner runner = new Runner(start.getYVal(), start.getXVal(), maze, Direction.EAST, end.getYVal(),
+                end.getXVal());
         String ans = pathAlgoirthm(maze, start, end);
 
         return ans;

@@ -24,9 +24,6 @@ public class Main {
         String[] userAns = config.getUserPath(args);
         FindPathAlgo algo = new FindPathAlgo();
 
-        // System.out.println(userAns[0]);
-        // System.out.println(userAns[1]);
-        // System.out.println(path);
         if (userAns[1].equals("-1")) {
             // config.print(args);
             Maze maze = new Maze(path);
