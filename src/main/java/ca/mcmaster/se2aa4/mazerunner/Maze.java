@@ -30,7 +30,6 @@ public class Maze {
                 loadMaze(line, count, maze);
                 count++;
             }
-            print2DArr(maze);
         } catch (Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
@@ -39,17 +38,6 @@ public class Maze {
     private void loadMaze(String line, int row, char[][] maze) {
         for (int col = 0; col < line.length(); col++) {
             maze[row][col] = line.charAt(col);
-        }
-    }
-
-    // Delete this method and where it's called later, currently using it for
-    // testing!!!!!!
-    public void print2DArr(char[][] maze) {
-        for (int i = 0; i < maze.length; i++) {
-            for (int j = 0; j < maze[0].length; j++) {
-                System.out.print(maze[i][j] + " ");
-            }
-            System.out.println();
         }
     }
 
@@ -65,8 +53,8 @@ public class Maze {
     }
 
     public Position findStartPos() {
-        int col = maze[0].length;
-        for (int i = 0; i < col; i++) {
+        int row = maze.length;
+        for (int i = 0; i < row; i++) {
             if (isPathValid(0, i)) {
                 return new Position(0, i);
             }
@@ -75,15 +63,26 @@ public class Maze {
     }
 
     public Position findEndPos() {
-        int col = maze[0].length;
-        for (int i = 0; i < col; i++) {
-            if (isPathValid(col - 1, i)) {
-                return new Position(col - 1, i);
+        int row = maze.length;
+        for (int i = 0; i < row; i++) {
+            if (isPathValid(maze[0].length - 1, i)) {
+                return new Position(maze[0].length - 1, i);
             }
         }
         return null;
     }
 
-    // Creating this method for debugging delete afterwards!!!
+    // Creating this method for debugging, delete afterwards!!!
+    public int getMazeRSize() {
+        return maze.length;
+    }
+
+    public int getMazeCSize() {
+        return maze[0].length;
+    }
+
+    public char[][] getMaze() {
+        return maze;
+    }
 
 }
