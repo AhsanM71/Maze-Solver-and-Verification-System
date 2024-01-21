@@ -1,15 +1,5 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.Arrays;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,11 +27,13 @@ public class Main {
 
             logger.info("** End of MazeRunner");
         } else {
-            System.out.println(path);
             Maze maze = new Maze(path);
             Boolean flag = algo.verifyGivenPath(maze, userAns);
-            System.out.println(flag);
+            if (flag) {
+                System.out.println("Inputted maze solution is correct");
+            } else {
+                System.out.println("Inputted maze solution is incorrect");
+            }
         }
-
     }
 }
