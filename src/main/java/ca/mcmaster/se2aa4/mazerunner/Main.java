@@ -27,7 +27,7 @@ public class Main {
         if (userAns[1].equals("-1")) {
             // config.print(args);
             Maze maze = new Maze(path);
-            String ans = algo.findPath(maze);
+            String ans = algo.mazeSolver(maze);
             if (algo.isPath()) {
                 logger.info("**** Computing path");
                 System.out.println(ans);

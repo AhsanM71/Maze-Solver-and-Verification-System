@@ -1,5 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.ArrayList;
+
 public class FindPathAlgo {
     private String ans = "";
 
@@ -8,7 +10,9 @@ public class FindPathAlgo {
     // it will determine the start and end positions of any given maze.
 
     // Ask if I should determine the start and end position in 2 different methods?
-    public String findPath(Maze maze) {
+    public String mazeSolver(Maze maze) {
+        ArrayList<String> path = new ArrayList<>();
+
         Position start = null;
         Position end = null;
 
@@ -23,14 +27,25 @@ public class FindPathAlgo {
             if (runner.checkRight(maze)) {
                 runner.turnRight();
                 runner.moveF(copy);
+                path.add("R");
+                path.add("F");
             } else if (runner.checkForward(maze)) {
                 runner.moveF(copy);
+                path.add("F");
             } else {
                 runner.turnLeft();
+                path.add("L");
             }
         }
         runner.printMaze(copy);
+        ans = convert(ans, path);
+        return ans;
+    }
 
+    private String convert(String ans, ArrayList<String> path) {
+        for (int i = 0; i < path.size(); i++) {
+            ans += path.get(i);
+        }
         return ans;
     }
 
