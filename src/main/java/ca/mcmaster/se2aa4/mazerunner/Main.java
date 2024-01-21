@@ -27,10 +27,11 @@ public class Main {
         if (userAns[1].equals("-1")) {
             // config.print(args);
             Maze maze = new Maze(path);
-            String ans = algo.mazeSolver(maze);
+            String[] ans = algo.mazeSolver(maze);
             if (algo.isPath()) {
                 logger.info("**** Computing path");
-                System.out.println(ans);
+                System.out.println("Canonical Form: " + ans[0]);
+                System.out.println("Factorized Form: " + ans[1]);
             } else {
                 logger.info("PATH NOT COMPUTED");
             }

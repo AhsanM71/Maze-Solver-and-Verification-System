@@ -10,7 +10,7 @@ public class FindPathAlgo {
     // it will determine the start and end positions of any given maze.
 
     // Ask if I should determine the start and end position in 2 different methods?
-    public String mazeSolver(Maze maze) {
+    public String[] mazeSolver(Maze maze) {
         ArrayList<String> path = new ArrayList<>();
 
         Position start = null;
@@ -39,7 +39,9 @@ public class FindPathAlgo {
         }
         runner.printMaze(copy);
         ans = convert(ans, path);
-        return ans;
+        String factorized = factorizedForm(path);
+        String[] answers = { ans, factorized };
+        return answers;
     }
 
     private String convert(String ans, ArrayList<String> path) {
@@ -47,6 +49,25 @@ public class FindPathAlgo {
             ans += path.get(i);
         }
         return ans;
+    }
+
+    private String factorizedForm(ArrayList<String> path) {
+        path.add("null");
+        String conv = "";
+        int count = 1;
+        for (int i = 0; i < path.size() - 1; i++) {
+            if (path.get(i).equals(path.get(i + 1))) {
+                count++;
+            } else {
+                if (count == 1) {
+                    conv += path.get(i) + " ";
+                } else {
+                    conv += count + path.get(i) + " ";
+                }
+                count = 1;
+            }
+        }
+        return conv;
     }
 
     public boolean isPath() {
