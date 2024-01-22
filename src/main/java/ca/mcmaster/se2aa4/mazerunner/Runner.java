@@ -22,11 +22,21 @@ public class Runner {
                 && maze.isPathValid(newCol, newRow);
     }
 
-    public void moveF(char[][] maze) {
+    // Created this getRow and getCol methods for debugging delete aferwards!!!!!!!
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    // add char[][] maze if you want to print the maze nicely!
+    public void moveF() {
         row += dir.getChangeRow();
         col += dir.getChangeCol();
         // delete this afer!!!!!
-        maze[row][col] = 'X';
+        // maze[row][col] = 'X';
     }
 
     public boolean checkRight(Maze maze) {
