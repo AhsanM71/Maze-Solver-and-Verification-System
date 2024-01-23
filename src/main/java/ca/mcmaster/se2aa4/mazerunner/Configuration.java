@@ -83,6 +83,8 @@ public class Configuration {
                 newStr += c;
             }
         }
+        newStr += conv.charAt(conv.length() - 1);
+        System.out.println(newStr);
         return newStr;
     }
 
