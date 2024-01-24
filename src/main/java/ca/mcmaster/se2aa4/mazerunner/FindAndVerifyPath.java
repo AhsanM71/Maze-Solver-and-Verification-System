@@ -2,7 +2,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.ArrayList;
 
-public class FindPathAlgo {
+public class FindAndVerifyPath {
     private String ans = "";
 
     public String[] mazeSolver(Maze maze) {
@@ -16,6 +16,9 @@ public class FindPathAlgo {
 
         Runner runner = new Runner(start.getYVal(), start.getXVal(), maze, Direction.EAST, end.getYVal(),
                 end.getXVal());
+        // Runner runner = new Runner(end.getYVal(), end.getXVal(), maze,
+        // Direction.WEST, start.getYVal(),
+        // start.getXVal());
         // char[][] copy = runner.copyMaze(maze);
         // add copy to moveF afterwards if you want to print the maze nicely
         while (!runner.isExitReached()) {
@@ -33,13 +36,13 @@ public class FindPathAlgo {
             }
         }
         // runner.printMaze(copy);
-        ans = convert(ans, path);
+        ans = convertToString(ans, path);
         String factorized = factorizedForm(path);
         String[] answers = { ans, factorized };
         return answers;
     }
 
-    private String convert(String ans, ArrayList<String> path) {
+    private String convertToString(String ans, ArrayList<String> path) {
         for (int i = 0; i < path.size(); i++) {
             ans += path.get(i);
         }
@@ -73,11 +76,11 @@ public class FindPathAlgo {
         Position start = maze.findStartPos();
         Position end = maze.findEndPos();
 
-        // Entery is on the west side and exist is east side, runner1 is facing east
+        // Entry is on the west side and exist is east side, runner1 is facing east
         Runner runner1 = new Runner(start.getYVal(), start.getXVal(), maze, Direction.EAST, end.getYVal(),
                 end.getXVal());
 
-        // Entery is on the east side and exist is west side, runner1 is facing west
+        // Entry is on the east side and exist is west side, runner1 is facing west
         Runner runner2 = new Runner(end.getYVal(), end.getXVal(), maze, Direction.WEST, start.getYVal(),
                 start.getXVal());
 
@@ -86,21 +89,22 @@ public class FindPathAlgo {
 
         flagWE = pathVerifier(path, maze, true, runner1);
         flagEW = pathVerifier(path, maze, true, runner2);
-
         return flagEW || flagWE;
     }
 
     public boolean pathVerifier(String path, Maze maze, Boolean flag, Runner runner) {
+        path = path.toUpperCase();
         for (int i = 0; i < path.length(); i++) {
             if (path.charAt(i) == 'R') {
-                if (!runner.checkRight(maze)) {
-                    flag = false;
-                    break;
-                } else {
-                    runner.turnRight();
-                    runner.moveF();
-                    i += 1;
-                }
+                runner.turnRight();
+                // if (!runner.checkRight(maze)) {
+                // flag = false;
+                // break;
+                // } else {
+                // runner.turnRight();
+                // runner.moveF();
+                // i += 1;
+                // }
             } else if (path.charAt(i) == 'F') {
                 if (!runner.checkForward(maze)) {
                     flag = false;
