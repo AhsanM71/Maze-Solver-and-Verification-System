@@ -11,7 +11,7 @@ public class Main {
         Configuration config = new Configuration();
         String path = config.getPath(args);
         String userAns = config.getUserPath(args);
-        FindPathAlgo algo = new FindPathAlgo();
+        FindAndVerifyPath algo = new FindAndVerifyPath();
 
         if (userAns == null) {
             // config.print(args);
@@ -21,11 +21,11 @@ public class Main {
                 logger.info("**** Computing path");
                 System.out.println("Canonical Form: " + ans[0]);
                 System.out.println("Factorized Form: " + ans[1]);
+                logger.info("PATH NOT VERIFIED");
             } else {
                 logger.info("PATH NOT COMPUTED");
             }
 
-            logger.info("** End of MazeRunner");
         } else {
             Maze maze = new Maze(path);
             Boolean flag = algo.verifyGivenPath(maze, userAns);
@@ -34,6 +34,8 @@ public class Main {
             } else {
                 System.out.println("Inputted maze solution is incorrect");
             }
+            logger.info("PATH NOT COMPUTED");
         }
+        logger.info("** End of MazeRunner");
     }
 }

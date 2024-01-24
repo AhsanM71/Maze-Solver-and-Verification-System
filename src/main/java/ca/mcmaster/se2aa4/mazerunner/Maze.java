@@ -13,7 +13,6 @@ public class Maze {
 
     // This method will read the file and store the maze in a 2D matrix
     public Maze(String fileName) {
-
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line;

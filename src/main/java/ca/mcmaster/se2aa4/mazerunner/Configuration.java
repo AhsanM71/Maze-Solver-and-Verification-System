@@ -14,20 +14,20 @@ import org.apache.logging.log4j.Logger;
 public class Configuration {
     private static final Logger logger = LogManager.getLogger();
 
-    public void print(String[] args) {
-        logger.info("** Start of Maze Runner");
-        Options options = new Options();
-        options = options.addOption("i", "input", true, "Reading flag type");
-        CommandLineParser parser = new DefaultParser();
-        try {
-            CommandLine cmd = parser.parse(options, args);
-            String path = cmd.getOptionValue("i", "input");
-            readMaze(path);
-        } catch (Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
-        }
+    // public void print(String[] args) {
+    // logger.info("** Start of Maze Runner");
+    // Options options = new Options();
+    // options = options.addOption("i", "input", true, "Reading flag type");
+    // CommandLineParser parser = new DefaultParser();
+    // try {
+    // CommandLine cmd = parser.parse(options, args);
+    // String path = cmd.getOptionValue("i", "input");
+    // readMaze(path);
+    // } catch (Exception e) {
+    // logger.error("/!\\ An error has occured /!\\");
+    // }
 
-    }
+    // }
 
     public String getPath(String[] args) {
         String path = "";
@@ -72,43 +72,49 @@ public class Configuration {
         String newStr = "";
         for (int i = 0; i < str.length() - 1; i++) {
             char c = str.charAt(i);
-            if (Character.isDigit(c)) {
+            char cN = str.charAt(i + 1);
+            if (Character.isDigit(c) && Character.isDigit(cN)) {
+                int n = Character.getNumericValue(c + cN);
+                char c3 = str.charAt(i + 2);
+                newStr += Character.toString(c3).repeat(n);
+                i += 2;
+            } else if (Character.isDigit(c)) {
                 int num = Character.getNumericValue(c);
                 char c2 = str.charAt(i + 1);
-                for (int j = 0; j < num; j++) {
-                    newStr += c2;
-                }
+                newStr += Character.toString(c2).repeat(num);
                 i += 1;
             } else {
                 newStr += c;
             }
         }
-        newStr += conv.charAt(conv.length() - 1);
+        if (!Character.isDigit(conv.charAt(conv.length() - 2))) {
+            newStr += conv.charAt(conv.length() - 1);
+        }
         System.out.println(newStr);
         return newStr;
     }
 
-    private void readMaze(String path) {
-        try {
-            logger.info("**** Reading the maze from file " + path);
-            BufferedReader reader = new BufferedReader(new FileReader(path));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                printMaze(line);
-            }
-        } catch (Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
-        }
-    }
+    // private void readMaze(String path) {
+    // try {
+    // logger.info("**** Reading the maze from file " + path);
+    // BufferedReader reader = new BufferedReader(new FileReader(path));
+    // String line;
+    // while ((line = reader.readLine()) != null) {
+    // printMaze(line);
+    // }
+    // } catch (Exception e) {
+    // logger.error("/!\\ An error has occured /!\\");
+    // }
+    // }
 
-    private void printMaze(String line) {
-        for (int idx = 0; idx < line.length(); idx++) {
-            if (line.charAt(idx) == '#') {
-                System.out.print("WALL ");
-            } else if (line.charAt(idx) == ' ') {
-                System.out.print("PASS ");
-            }
-        }
-        System.out.print(System.lineSeparator());
-    }
+    // private void printMaze(String line) {
+    // for (int idx = 0; idx < line.length(); idx++) {
+    // if (line.charAt(idx) == '#') {
+    // System.out.print("WALL ");
+    // } else if (line.charAt(idx) == ' ') {
+    // System.out.print("PASS ");
+    // }
+    // }
+    // System.out.print(System.lineSeparator());
+    // }
 }
