@@ -11,6 +11,7 @@ public class Main {
         Configuration config = new Configuration();
         String path = config.getPath(args);
         String userPath = config.getUserPath(args);
+
         VerifyPath verify = new VerifyPath();
         Maze maze = new Maze(path);
 
@@ -20,27 +21,30 @@ public class Main {
             // if block get's executed since only the maze file path was written in the
             // command line
             // Using the rightHandRule algoirthm to solve the maze
-            rightHandRule = new FindPathRHRule();
-            String solvedPath = rightHandRule.mazeSolver(maze);
-            if (solvedPath.length() > -1) {
-                logger.info("**** Computing path");
-                System.out.println("Factorized Form: " + solvedPath);
-                logger.info("PATH NOT VERIFIED");
-            } else {
+            logger.info("** Starting Maze Runner");
+            logger.info("**** Computing path");
+            try {
+                rightHandRule = new FindPathRHRule();
+                String solvedPath = rightHandRule.mazeSolver(maze);
+                if (solvedPath.length() > -1) {
+                    // logger.info("**** Computing path");
+                    System.out.println("Factorized Form: " + solvedPath);
+                } else {
+                    logger.info("PATH NOT COMPUTED");
+                }
+            } catch (Exception e) {
                 logger.info("PATH NOT COMPUTED");
             }
 
         } else {
             // else block get's executed since user inputted the maze file path and maze
             // solution to verify
-
             Boolean isValid = verify.verifyGivenPath(maze, userPath);
             if (isValid) {
-                System.out.println("Inputted maze solution is correct");
+                System.out.println("correct path");
             } else {
-                System.out.println("Inputted maze solution is incorrect");
+                System.out.println("incorrect path");
             }
-            logger.info("PATH NOT COMPUTED");
         }
         logger.info("** End of MazeRunner");
     }

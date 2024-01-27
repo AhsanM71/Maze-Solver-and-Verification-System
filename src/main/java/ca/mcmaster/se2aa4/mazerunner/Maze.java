@@ -14,6 +14,8 @@ public class Maze {
     // This method will read the file and store the maze in a 2D matrix
     public Maze(String fileName) {
         try {
+            // Reading the maze file once to obtain the number of rows and columns of the
+            // maze
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line;
             int columns = 0;
@@ -22,6 +24,7 @@ public class Maze {
                 columns = line.length();
                 rows++;
             }
+            // Reading the maze file again to load it into a 2D array
             BufferedReader reader2 = new BufferedReader(new FileReader(fileName));
             maze = new char[rows][columns];
             int count = 0;
@@ -34,6 +37,7 @@ public class Maze {
         }
     }
 
+    // This helper function loads the maze into a 2D array, line by line
     private void loadMaze(String line, int row, char[][] maze) {
         for (int col = 0; col < line.length(); col++) {
             maze[row][col] = line.charAt(col);
@@ -46,9 +50,12 @@ public class Maze {
         return maze[row][col] == ' ';
     }
 
+    // This method get's the start position of the maze
     public Position findStartPos() {
         int row = maze.length;
         for (int i = 0; i < row; i++) {
+            // Looking for the only valid path for the first column of the maze (a.k.a start
+            // position)
             if (isPathValid(0, i)) {
                 return new Position(0, i);
             }
@@ -56,9 +63,12 @@ public class Maze {
         return null;
     }
 
+    // This method get's the end position of the maze
     public Position findEndPos() {
         int row = maze.length;
         for (int i = 0; i < row; i++) {
+            // Looking for the only valid path for the last column of the maze (a.k.a end
+            // position)
             if (isPathValid(maze[0].length - 1, i)) {
                 return new Position(maze[0].length - 1, i);
             }
@@ -66,6 +76,7 @@ public class Maze {
         return null;
     }
 
+    // Returns the dimensions of the maze
     public int getMazeRSize() {
         return maze.length;
     }
