@@ -27,6 +27,7 @@ public class Configuration {
         } catch (Exception e) {
             logger.error("An error has occurred");
         }
+        logger.info("**** Reading the maze from file" + path);
         return path;
     }
 
@@ -58,6 +59,9 @@ public class Configuration {
     private String formatStr(String conv) {
         String str = conv.replaceAll(" ", "");
         String newStr = "";
+        if (conv.length() == 1) {
+            return conv;
+        }
         for (int i = 0; i < str.length() - 1; i++) {
             char c = str.charAt(i);
             char nextChar = str.charAt(i + 1);
