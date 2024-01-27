@@ -40,11 +40,6 @@ public class Maze {
         }
     }
 
-    // This method checks if at a certain row and col does there exist a wall
-    public boolean isWall(int col, int row) {
-        return maze[row][col] == '#';
-    }
-
     // This method will check if at a certain row or col does there exist a valid
     // path
     public boolean isPathValid(int col, int row) {
@@ -78,10 +73,4 @@ public class Maze {
     public int getMazeCSize() {
         return maze[0].length;
     }
-
-    // Creating this method for debugging, delete afterwards!!!
-    public char[][] getMaze() {
-        return maze;
-    }
-
 }

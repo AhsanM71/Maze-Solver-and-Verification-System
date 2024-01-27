@@ -10,26 +10,32 @@ public class Main {
     public static void main(String[] args) {
         Configuration config = new Configuration();
         String path = config.getPath(args);
-        String userAns = config.getUserPath(args);
-        FindAndVerifyPath algo = new FindAndVerifyPath();
+        String userPath = config.getUserPath(args);
+        VerifyPath verify = new VerifyPath();
+        Maze maze = new Maze(path);
 
-        if (userAns == null) {
-            // config.print(args);
-            Maze maze = new Maze(path);
-            String[] ans = algo.mazeSolver(maze);
-            if (algo.isPath()) {
+        PathFinder rightHandRule;
+        // if Condition checking if a user inputted path is given from the command line.
+        if (userPath == null) {
+            // if block get's executed since only the maze file path was written in the
+            // command line
+            // Using the rightHandRule algoirthm to solve the maze
+            rightHandRule = new FindPathRHRule();
+            String solvedPath = rightHandRule.mazeSolver(maze);
+            if (solvedPath.length() > -1) {
                 logger.info("**** Computing path");
-                System.out.println("Canonical Form: " + ans[0]);
-                System.out.println("Factorized Form: " + ans[1]);
+                System.out.println("Factorized Form: " + solvedPath);
                 logger.info("PATH NOT VERIFIED");
             } else {
                 logger.info("PATH NOT COMPUTED");
             }
 
         } else {
-            Maze maze = new Maze(path);
-            Boolean flag = algo.verifyGivenPath(maze, userAns);
-            if (flag) {
+            // else block get's executed since user inputted the maze file path and maze
+            // solution to verify
+
+            Boolean isValid = verify.verifyGivenPath(maze, userPath);
+            if (isValid) {
                 System.out.println("Inputted maze solution is correct");
             } else {
                 System.out.println("Inputted maze solution is incorrect");
