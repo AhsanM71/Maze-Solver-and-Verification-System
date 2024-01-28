@@ -21,21 +21,22 @@ public class Main {
             // if block get's executed since only the maze file path was written in the
             // command line
             // Using the rightHandRule algoirthm to solve the maze
-            logger.info("** Starting Maze Runner");
-            logger.info("**** Computing path");
+
             try {
                 rightHandRule = new FindPathRHRule();
                 String solvedPath = rightHandRule.mazeSolver(maze);
                 if (solvedPath.length() > -1) {
-                    // logger.info("**** Computing path");
-                    System.out.println("Factorized Form: " + solvedPath);
+                    System.out.println(solvedPath);
                 } else {
                     logger.info("PATH NOT COMPUTED");
                 }
             } catch (Exception e) {
+                logger.info("** Starting Maze Runner");
+                logger.info("**** Reading the maze from file" + path);
+                logger.info("**** Computing path");
                 logger.info("PATH NOT COMPUTED");
+                logger.info("** End of MazeRunner");
             }
-
         } else {
             // else block get's executed since user inputted the maze file path and maze
             // solution to verify
@@ -46,6 +47,5 @@ public class Main {
                 System.out.println("incorrect path");
             }
         }
-        logger.info("** End of MazeRunner");
     }
 }

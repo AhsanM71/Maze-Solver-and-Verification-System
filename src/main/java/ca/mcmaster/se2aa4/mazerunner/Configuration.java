@@ -27,7 +27,6 @@ public class Configuration {
         } catch (Exception e) {
             logger.error("An error has occurred");
         }
-        logger.info("**** Reading the maze from file" + path);
         return path;
     }
 
@@ -57,10 +56,10 @@ public class Configuration {
     // Formats the user inputted path in either Canonical or Factorized form and
     // returns the path in Canonical form
     private String formatStr(String conv) {
-        String str = conv.replaceAll(" ", "");
+        String str = conv.trim().replaceAll("\\s", "");
         String newStr = "";
-        if (conv.length() == 1) {
-            return conv;
+        if (str.length() == 1) {
+            return str;
         }
         for (int i = 0; i < str.length() - 1; i++) {
             char c = str.charAt(i);
@@ -95,9 +94,9 @@ public class Configuration {
         // if condition test's an edge case where if the last character in the String
         // conv doesn't have a number before it then execute the condition, this edge
         // case is cause by the iterations of i from the for loop
-        if (!Character.isDigit(conv.charAt(conv.length() - 2))) {
+        if (!Character.isDigit(str.charAt(str.length() - 2))) {
             // Append the last character to the String.
-            newStr += conv.charAt(conv.length() - 1);
+            newStr += str.charAt(str.length() - 1);
         }
         return newStr;
     }

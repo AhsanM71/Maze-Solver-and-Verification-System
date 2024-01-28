@@ -36,6 +36,7 @@ public class VerifyPath {
     // This helper function actually checks the user inputted path
     public boolean pathVerifier(String path, Maze maze, Boolean isValid, Runner runner) {
         path = path.toUpperCase();
+        boolean flag = true;
         for (int i = 0; i < path.length(); i++) {
             try {
                 // This helper method checks if the user inputted String contains any invalid
@@ -59,13 +60,14 @@ public class VerifyPath {
                     runner.turnLeft();
                 }
             } catch (IllegalArgumentException e) {
+                flag = false;
                 logger.error(e);
             }
         }
         // After all the movements are performed from the path, check if runner has
         // reached the end and return true if it has
         if (runner.isExitReached() && isValid) {
-            return true;
+            return true && flag;
         }
         return false;
     }
