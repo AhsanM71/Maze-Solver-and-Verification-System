@@ -2,7 +2,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.ArrayList;
 
-public class FindPathRHRule implements PathFinder {
+public class RHRuleSol implements PathFinder {
     private String str = "";
 
     public String mazeSolver(Maze maze) {

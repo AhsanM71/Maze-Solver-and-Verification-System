@@ -12,4 +12,10 @@ public interface Player {
     public void turnLeft();
 
     public boolean isExitReached();
+
+    public int x();
+
+    public int y();
+
+    public Direction getDir();
 }

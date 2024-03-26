@@ -64,4 +64,16 @@ public class Runner implements Player {
     public boolean isExitReached() {
         return currRow == endRow && currCol == endCol;
     }
+
+    public int x() {
+        return dir.getChangeCol();
+    }
+
+    public int y() {
+        return dir.getChangeRow();
+    }
+
+    public Direction getDir() {
+        return dir;
+    }
 }

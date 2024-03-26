@@ -1,5 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.Objects;
+
 public class Position {
 
     private int x;
@@ -25,4 +27,24 @@ public class Position {
     public void setY(int y) {
         this.y = y;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Position point = (Position) obj;
+        return x == point.x && y == point.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    public boolean equals(Position pos2) {
+        return ((this.getXVal() == pos2.getXVal()) && (this.getYVal() == pos2.getYVal()));
+    }
+
 }

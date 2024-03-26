@@ -16,6 +16,7 @@ public class Main {
         Maze maze = new Maze(path);
 
         PathFinder rightHandRule;
+        PathFinder bfs;
         // if Condition checking if a user inputted path is given from the command line.
         if (userPath == null) {
             // if block get's executed since only the maze file path was written in the
@@ -23,8 +24,9 @@ public class Main {
             // Using the rightHandRule algoirthm to solve the maze
 
             try {
-                rightHandRule = new FindPathRHRule();
-                String solvedPath = rightHandRule.mazeSolver(maze);
+                rightHandRule = new RHRuleSol();
+                bfs = new BFSSol();
+                String solvedPath = bfs.mazeSolver(maze);
                 if (solvedPath.length() > -1) {
                     System.out.println(solvedPath);
                 } else {
