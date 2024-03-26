@@ -17,7 +17,7 @@ public class FindPathRHRule implements PathFinder {
         Runner runner = new Runner(start.getYVal(), start.getXVal(), maze, Direction.EAST, end.getYVal(),
                 end.getXVal());
 
-        // Ahile loop will stop once runner has reached the end of the maze
+        // WWile loop will stop once runner has reached the end of the maze
         while (!runner.isExitReached()) {
             // If condition checks if runner can move right
             if (runner.checkRight(maze)) {
