@@ -8,7 +8,6 @@ import ca.mcmaster.se2aa4.mazerunner.maze_runner.Position;
 import ca.mcmaster.se2aa4.mazerunner.maze_runner.Runner;
 
 public class RHRuleSol implements PathFinder {
-    private String str = "";
 
     public String mazeSolver(Maze maze, PathFormatter format) {
         ArrayList<String> path = new ArrayList<>();

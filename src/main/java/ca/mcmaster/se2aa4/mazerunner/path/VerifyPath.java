@@ -39,7 +39,7 @@ public class VerifyPath {
     }
 
     // This helper function actually checks the user inputted path
-    public boolean pathVerifier(String path, Maze maze, Boolean isValid, Runner runner) {
+    private boolean pathVerifier(String path, Maze maze, Boolean isValid, Runner runner) {
         path = path.toUpperCase();
         boolean flag = true;
         for (int i = 0; i < path.length(); i++) {
