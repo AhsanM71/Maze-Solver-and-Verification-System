@@ -1,56 +1,34 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Configuration {
     private final Logger logger = LogManager.getLogger();
 
-    // Retrieves the maze file path from the command line arguments and return maze
-    // file path.
-    public String getPath(String[] args) {
-        String path = "";
-        String userPath = "";
+    public List<String> getPaths(String[] args) {
+        List<String> paths = new ArrayList<>();
         Options optionsI = new Options();
-        optionsI = optionsI.addOption("i", "input", true, "Reading flag type");
+        optionsI.addOption("i", "input", true, "Reading flag type");
         optionsI.addOption("p", true, "Reading user inputted path");
+        optionsI.addOption("method", true, "Reading user requested method");
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(optionsI, args);
-            path = cmd.getOptionValue("i", "input");
-            userPath = cmd.getOptionValue("p");
+            paths.add(cmd.getOptionValue("i", "input"));
+            paths.add(formatStr(cmd.getOptionValue("p", "null")));
+            paths.add(cmd.getOptionValue("method", "righthand"));
         } catch (Exception e) {
             logger.error("An error has occurred");
         }
-        return path;
-    }
-
-    // Retrieves the user inputted path from the command line arguments and return
-    // user inputted path
-    public String getUserPath(String[] args) {
-        String path = "";
-        String userPath = "";
-        Options options = new Options();
-        options.addOption("i", "input", true, "Reading file path");
-        options.addOption("p", true, "Reading user inputted path");
-        CommandLineParser parser = new DefaultParser();
-        try {
-            CommandLine cmd = parser.parse(options, args);
-            path = cmd.getOptionValue("i", "-1");
-            userPath = cmd.getOptionValue("p");
-        } catch (ParseException pe) {
-            logger.error("An error has occurred");
-        }
-        if (userPath != null) {
-            String ans = formatStr(userPath);
-            return ans;
-        }
-        return userPath;
+        return paths;
     }
 
     // Formats the user inputted path in either Canonical or Factorized form and

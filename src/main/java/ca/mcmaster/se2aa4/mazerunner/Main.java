@@ -1,5 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,45 +11,51 @@ public class Main {
 
     public static void main(String[] args) {
         Configuration config = new Configuration();
-        String path = config.getPath(args);
-        String userPath = config.getUserPath(args);
-
+        List<String> paths = config.getPaths(args);
+        String input = paths.get(0);
         VerifyPath verify = new VerifyPath();
-        Maze maze = new Maze(path);
+        Maze maze = new Maze(input);
 
         PathFinder rightHandRule;
         PathFinder bfs;
-        // if Condition checking if a user inputted path is given from the command line.
-        if (userPath == null) {
-            // if block get's executed since only the maze file path was written in the
-            // command line
-            // Using the rightHandRule algoirthm to solve the maze
 
-            try {
-                rightHandRule = new RHRuleSol();
-                bfs = new BFSSol();
-                String solvedPath = bfs.mazeSolver(maze);
-                if (solvedPath.length() > -1) {
-                    System.out.println(solvedPath);
-                } else {
-                    logger.info("PATH NOT COMPUTED");
+        try {
+            String path = paths.get(1);
+            String method = paths.get(2);
+            if (path.equals("null")) {
+                if (method.equals("righthand")) {
+                    rightHandRule = new RHRuleSol();
+                    String solvedPath = rightHandRule.mazeSolver(maze);
+                    if (solvedPath.length() > -1) {
+                        System.out.println(solvedPath);
+                    } else {
+                        logger.info("PATH NOT COMPUTED");
+                    }
+                } else if (method.equals("BFS")) {
+                    bfs = new BFSSol();
+                    String solvedPath = bfs.mazeSolver(maze);
+                    if (solvedPath.length() > -1) {
+                        System.out.println(solvedPath);
+                    } else {
+                        logger.info("PATH NOT COMPUTED");
+                    }
                 }
-            } catch (Exception e) {
-                logger.info("** Starting Maze Runner");
-                logger.info("**** Reading the maze from file" + path);
-                logger.info("**** Computing path");
-                logger.info("PATH NOT COMPUTED");
-                logger.info("** End of MazeRunner");
-            }
-        } else {
-            // else block get's executed since user inputted the maze file path and maze
-            // solution to verify
-            Boolean isValid = verify.verifyGivenPath(maze, userPath);
-            if (isValid) {
-                System.out.println("correct path");
             } else {
-                System.out.println("incorrect path");
+                Boolean isValid = verify.verifyGivenPath(maze, path);
+                if (isValid) {
+                    System.out.println("correct path");
+                } else {
+                    System.out.println("incorrect path");
+                }
             }
+
+        } catch (Exception e) {
+            logger.info("** Starting Maze Runner");
+            logger.info("**** Reading the maze from file" + input);
+            logger.info("**** Computing path");
+            logger.info("PATH NOT COMPUTED");
+            logger.info("** End of MazeRunner");
+
         }
     }
 }
