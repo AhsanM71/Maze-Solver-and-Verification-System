@@ -6,12 +6,11 @@ import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.maze_runner.Direction;
 import ca.mcmaster.se2aa4.mazerunner.maze_runner.Position;
 import ca.mcmaster.se2aa4.mazerunner.maze_runner.Runner;
-import ca.mcmaster.se2aa4.mazerunner.path.PathFinder;
 
 public class RHRuleSol implements PathFinder {
     private String str = "";
 
-    public String mazeSolver(Maze maze) {
+    public String mazeSolver(Maze maze, PathFormatter format) {
         ArrayList<String> path = new ArrayList<>();
 
         Position start = null;
@@ -45,47 +44,8 @@ public class RHRuleSol implements PathFinder {
                 path.add("L");
             }
         }
-        // Calling convertToString method to convert the Arraylist path to a String
-        str = convertToString(str, path);
         // Calling the factroizedForm method to get the path from Canonical form to
         // Factorized form
-        String factorized = factorizedForm(path);
-        String answer = factorized;
-        return answer;
-    }
-
-    private String convertToString(String str, ArrayList<String> path) {
-        for (int i = 0; i < path.size(); i++) {
-            str += path.get(i);
-        }
-        return str;
-    }
-
-    private String factorizedForm(ArrayList<String> path) {
-        // Adding null to the list to act as the stopping condition for the for loop and
-        // to ensure the String get's formatted correctly
-        path.add("null");
-        String conv = "";
-        int count = 1;
-        for (int i = 0; i < path.size() - 1; i++) {
-            // Checking if the neighbouring characters are the same
-            if (path.get(i).equals(path.get(i + 1))) {
-                // count the number of neighbouring characters that are the same
-                count++;
-                // Else condition get's executed if the neighbouring characters aren't the same
-            } else {
-                // If condition checks if theres only one occurance of that specific character
-                // then only append that char to the factorized form String
-                if (count == 1) {
-                    conv += path.get(i) + " ";
-                    // Else if there are a number of occurances of a specific char then append the
-                    // number of occurances with the char to the factorized form String
-                } else {
-                    conv += count + path.get(i) + " ";
-                }
-                count = 1;
-            }
-        }
-        return conv;
+        return format.factorizedForm(path);
     }
 }

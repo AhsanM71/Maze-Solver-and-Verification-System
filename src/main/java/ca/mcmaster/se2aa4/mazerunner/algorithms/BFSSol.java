@@ -15,11 +15,10 @@ import ca.mcmaster.se2aa4.mazerunner.maze_runner.Direction;
 import ca.mcmaster.se2aa4.mazerunner.maze_runner.Player;
 import ca.mcmaster.se2aa4.mazerunner.maze_runner.Position;
 import ca.mcmaster.se2aa4.mazerunner.maze_runner.Runner;
-import ca.mcmaster.se2aa4.mazerunner.path.PathFinder;
 
 public class BFSSol implements PathFinder {
 
-    public String mazeSolver(Maze maze) {
+    public String mazeSolver(Maze maze, PathFormatter format) {
         int cols = maze.getMazeCSize();
         int rows = maze.getMazeRSize();
         Set<Position> visited = new HashSet<>();
@@ -56,7 +55,7 @@ public class BFSSol implements PathFinder {
             current = path.get(current);
         }
         Collections.reverse(shortestPath);
-        return sp(shortestPath, prevDir);
+        return shortestPath(shortestPath, prevDir, format);
     }
 
     public boolean isValid(int newX, int newY, int rows, int cols, Position neighbour, Maze maze,
@@ -65,47 +64,36 @@ public class BFSSol implements PathFinder {
                 && !visited.contains(neighbour);
     }
 
-    public String sp(List<Position> path, Direction prevDir) {
-        char c;
-        StringBuilder sb = new StringBuilder();
+    public String shortestPath(List<Position> path, Direction prevDir, PathFormatter format) {
+        List<Direction> directions = new ArrayList<>();
         for (int i = 1; i < path.size(); i++) {
             Position prev = path.get(i - 1);
             Position curr = path.get(i);
             int dx = curr.getXVal() - prev.getXVal();
             int dy = curr.getYVal() - prev.getYVal();
 
-            if (dx == 1 && dy == 0) {
-                sb.append("E");
-            } else if (dx == -1 && dy == 0) {
-                sb.append("W");
-            } else if (dx == 0 && dy == 1) {
-                sb.append("S");
-            } else if (dx == 0 && dy == -1) {
-                sb.append("N");
+            if (dy == 0 && dx == 1) {
+                directions.add(Direction.EAST);
+            } else if (dy == 0 && dx == -1) {
+                directions.add(Direction.WEST);
+            } else if (dy == 1 && dx == 0) {
+                directions.add(Direction.WEST);
+            } else if (dy == -1 && dx == 0) {
+                directions.add(Direction.NORTH);
             }
 
         }
-
-        if (prevDir == Direction.EAST) {
-            c = 'E';
-        } else if (prevDir == Direction.NORTH) {
-            c = 'N';
-        } else if (prevDir == Direction.WEST) {
-            c = 'W';
-        } else {
-            c = 'S';
-        }
-        return converter(sb.toString(), c);
+        return converter(directions, prevDir, format);
     }
 
-    public String converter(String str, char prevDir) {
+    public String converter(List<Direction> directions, Direction prevDir, PathFormatter format) {
         StringBuilder sp = new StringBuilder();
-        for (int i = 0; i < str.length(); i++) {
-            char dir = str.charAt(i);
-            if (dir == prevDir) {
+        for (int i = 0; i < directions.size(); i++) {
+            Direction dir = directions.get(i);
+            if (dir.equals(prevDir)) {
                 sp.append("F");
             } else {
-                if (dir == getLeft(prevDir)) {
+                if (dir.equals(prevDir.getLeftDir())) {
                     sp.append("LF");
                     prevDir = dir;
                 } else {
@@ -119,56 +107,6 @@ public class BFSSol implements PathFinder {
         for (int i = 0; i < ans.length(); i++) {
             path.add(ans.charAt(i) + "");
         }
-        return factorizedForm(path);
-    }
-
-    public char getLeft(char c) {
-        switch (c) {
-            case ('E'):
-                return 'N'; // Face North
-            case ('N'):
-                return 'W'; // Face West
-            case ('S'):
-                return 'E'; // Face East
-            case ('W'):
-                return 'S'; // Face South
-            default:
-                return '0';
-        }
-    }
-
-    public char getRight(char c) {
-        switch (c) {
-            case ('E'):
-                return 'S'; // Face South
-            case ('N'):
-                return 'E'; // Face East
-            case ('S'):
-                return 'W'; // Face West
-            case ('W'):
-                return 'N'; // Face North
-            default:
-                return '0';
-        }
-
-    }
-
-    private String factorizedForm(ArrayList<String> path) {
-        path.add("null");
-        String conv = "";
-        int count = 1;
-        for (int i = 0; i < path.size() - 1; i++) {
-            if (path.get(i).equals(path.get(i + 1))) {
-                count++;
-            } else {
-                if (count == 1) {
-                    conv += path.get(i) + " ";
-                } else {
-                    conv += count + path.get(i) + " ";
-                }
-                count = 1;
-            }
-        }
-        return conv;
+        return format.factorizedForm(path);
     }
 }
