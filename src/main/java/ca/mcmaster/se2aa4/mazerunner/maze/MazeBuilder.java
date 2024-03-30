@@ -7,25 +7,23 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class mazeBuilder implements fileProcessor {
-
-    private char[][] maze;
+public class MazeBuilder implements FileProcessor {
+    private MazeCell[][] maze;
     private String fileName;
+    private int[] dimensions;
     private final Logger logger = LogManager.getLogger();
 
-    public mazeBuilder(String fileName, char[][] maze) {
+    public MazeBuilder(String fileName, MazeCell[][] maze) {
         this.maze = maze;
         this.fileName = fileName;
     }
 
     public void renderMaze() {
         try {
-            int[] dimensions = mazeDimension();
-            int columns = dimensions[0];
-            int rows = dimensions[1];
-
-            builder(rows, columns);
-
+            dimensions = mazeDimension();
+            maze = new MazeCell[dimensions[0]][dimensions[1]];
+            initialize();
+            builder();
         } catch (Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
@@ -47,10 +45,9 @@ public class mazeBuilder implements fileProcessor {
         return size;
     }
 
-    public void builder(int rows, int columns) throws IOException {
+    public void builder() throws IOException {
         String line;
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        maze = new char[rows][columns];
         int count = 0;
         while ((line = reader.readLine()) != null) {
             loadMaze(line, count, maze);
@@ -59,13 +56,24 @@ public class mazeBuilder implements fileProcessor {
         reader.close();
     }
 
-    private void loadMaze(String line, int row, char[][] maze) {
+    private void loadMaze(String line, int row, MazeCell[][] maze) {
         for (int col = 0; col < line.length(); col++) {
-            maze[row][col] = line.charAt(col);
+            if (line.charAt(col) == '#') {
+                maze[row][col].setType(CellType.WALL);
+            }
+
         }
     }
 
-    public char[][] getMaze() {
+    public MazeCell[][] getMaze() {
         return maze;
+    }
+
+    private void initialize() {
+        for (int i = 0; i < dimensions[0]; i++) {
+            for (int j = 0; j < dimensions[1]; j++) {
+                maze[i][j] = new MazeCell(CellType.PATH);
+            }
+        }
     }
 }

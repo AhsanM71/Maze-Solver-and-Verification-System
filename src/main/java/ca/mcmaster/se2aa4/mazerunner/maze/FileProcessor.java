@@ -2,12 +2,12 @@ package ca.mcmaster.se2aa4.mazerunner.maze;
 
 import java.io.IOException;
 
-public interface fileProcessor {
+public interface FileProcessor {
     public int[] mazeDimension() throws IOException;
 
-    public void builder(int row, int col) throws IOException;
+    public void builder() throws IOException;
 
     public void renderMaze();
 
-    public char[][] getMaze();
+    public MazeCell[][] getMaze();
 }
