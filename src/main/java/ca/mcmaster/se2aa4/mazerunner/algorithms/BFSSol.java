@@ -1,4 +1,4 @@
-package ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner.algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,6 +9,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+
+import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
+import ca.mcmaster.se2aa4.mazerunner.maze_runner.Direction;
+import ca.mcmaster.se2aa4.mazerunner.maze_runner.Player;
+import ca.mcmaster.se2aa4.mazerunner.maze_runner.Position;
+import ca.mcmaster.se2aa4.mazerunner.maze_runner.Runner;
+import ca.mcmaster.se2aa4.mazerunner.path.PathFinder;
 
 public class BFSSol implements PathFinder {
 

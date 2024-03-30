@@ -1,8 +1,8 @@
-package ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner.maze_runner;
 
 // Enumeration representing the possible directions for runner inside maze
 
-enum Direction {
+public enum Direction {
 
     NORTH(-1, 0),
 

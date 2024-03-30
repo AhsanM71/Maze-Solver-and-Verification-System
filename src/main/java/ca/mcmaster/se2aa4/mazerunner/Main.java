@@ -5,6 +5,12 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import ca.mcmaster.se2aa4.mazerunner.algorithms.BFSSol;
+import ca.mcmaster.se2aa4.mazerunner.algorithms.RHRuleSol;
+import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
+import ca.mcmaster.se2aa4.mazerunner.path.PathFinder;
+import ca.mcmaster.se2aa4.mazerunner.path.VerifyPath;
+
 public class Main {
 
     private static final Logger logger = LogManager.getLogger();

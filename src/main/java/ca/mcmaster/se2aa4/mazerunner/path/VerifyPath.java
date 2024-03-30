@@ -1,7 +1,12 @@
-package ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner.path;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
+import ca.mcmaster.se2aa4.mazerunner.maze_runner.Direction;
+import ca.mcmaster.se2aa4.mazerunner.maze_runner.Position;
+import ca.mcmaster.se2aa4.mazerunner.maze_runner.Runner;
 
 public class VerifyPath {
     private final Logger logger = LogManager.getLogger();
