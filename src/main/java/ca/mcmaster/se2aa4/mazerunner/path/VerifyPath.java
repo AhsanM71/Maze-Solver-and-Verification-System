@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.maze_runner.Direction;
+import ca.mcmaster.se2aa4.mazerunner.maze_runner.Player;
 import ca.mcmaster.se2aa4.mazerunner.maze_runner.Position;
 import ca.mcmaster.se2aa4.mazerunner.maze_runner.Runner;
 
@@ -20,12 +21,10 @@ public class VerifyPath {
 
         // Checking the path from EAST to WEST and WEST to EAST:
         // Entry is on the west side and exist is east side, runner1 is facing east
-        Runner runner1 = new Runner(start.getYVal(), start.getXVal(), maze, Direction.EAST, end.getYVal(),
-                end.getXVal());
+        Player runner1 = new Runner(start.getYVal(), start.getXVal(), Direction.EAST, end.getYVal(), end.getXVal());
 
         // Entry is on the east side and exist is west side, runner1 is facing west
-        Runner runner2 = new Runner(end.getYVal(), end.getXVal(), maze, Direction.WEST, start.getYVal(),
-                start.getXVal());
+        Player runner2 = new Runner(end.getYVal(), end.getXVal(), Direction.WEST, start.getYVal(), start.getXVal());
 
         boolean flagWE;
         boolean flagEW;
@@ -39,7 +38,7 @@ public class VerifyPath {
     }
 
     // This helper function actually checks the user inputted path
-    private boolean pathVerifier(String path, Maze maze, Boolean isValid, Runner runner) {
+    private boolean pathVerifier(String path, Maze maze, Boolean isValid, Player runner) {
         path = path.toUpperCase();
         boolean flag = true;
         for (int i = 0; i < path.length(); i++) {
@@ -72,7 +71,7 @@ public class VerifyPath {
         // After all the movements are performed from the path, check if runner has
         // reached the end and return true if it has
         if (runner.isExitReached() && isValid) {
-            return true && flag;
+            return flag;
         }
         return false;
     }

@@ -11,7 +11,7 @@ public class Runner implements Player {
     private int endCol;
     private Direction dir;
 
-    public Runner(int currRow, int currCol, Maze maze, Direction dir, int endRow, int endCol) {
+    public Runner(int currRow, int currCol, Direction dir, int endRow, int endCol) {
         this.currRow = currRow;
         this.currCol = currCol;
         this.endRow = endRow;

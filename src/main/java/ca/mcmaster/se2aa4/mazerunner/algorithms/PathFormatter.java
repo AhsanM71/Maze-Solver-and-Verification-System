@@ -1,10 +1,10 @@
 package ca.mcmaster.se2aa4.mazerunner.algorithms;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PathFormatter {
 
-    public String factorizedForm(ArrayList<String> path) {
+    public String factorizedForm(List<String> path) {
         // Adding null to the list to act as the stopping condition for the for loop and
         // to ensure the String get's formatted correctly
         path.add("null");

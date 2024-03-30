@@ -22,20 +22,10 @@ public class SolveFactory {
         if (path.equals("null")) {
             if (method.equals("righthand")) {
                 rightHandRule = new RHRuleSol();
-                String solvedPath = rightHandRule.mazeSolver(maze, format);
-                if (solvedPath.length() > -1) {
-                    System.out.println(solvedPath);
-                } else {
-                    logger.info("PATH NOT COMPUTED");
-                }
+                runMethod(rightHandRule, maze, format);
             } else if (method.equals("BFS")) {
                 bfs = new BFSSol();
-                String solvedPath = bfs.mazeSolver(maze, format);
-                if (solvedPath.length() > -1) {
-                    System.out.println(solvedPath);
-                } else {
-                    logger.info("PATH NOT COMPUTED");
-                }
+                runMethod(bfs, maze, format);
             }
         } else {
             Boolean isValid = verify.verifyGivenPath(maze, path);
@@ -45,6 +35,14 @@ public class SolveFactory {
                 System.out.println("incorrect path");
             }
         }
+    }
 
+    private void runMethod(PathFinder algo, Maze maze, PathFormatter format) {
+        String solvedPath = algo.mazeSolver(maze, format);
+        if (solvedPath.length() > -1) {
+            System.out.println(solvedPath);
+        } else {
+            logger.info("PATH NOT COMPUTED");
+        }
     }
 }

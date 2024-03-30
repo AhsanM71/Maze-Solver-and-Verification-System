@@ -11,6 +11,7 @@ public class MazeBuilder implements FileProcessor {
     private MazeCell[][] maze;
     private String fileName;
     private int[] dimensions;
+    private BufferedReader reader;
     private final Logger logger = LogManager.getLogger();
 
     public MazeBuilder(String fileName, MazeCell[][] maze) {
@@ -31,7 +32,7 @@ public class MazeBuilder implements FileProcessor {
 
     public int[] mazeDimension() throws IOException {
         int[] size = new int[2];
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        reader = new BufferedReader(new FileReader(fileName));
         String line;
         int col = 0;
         int rows = 0;
@@ -47,7 +48,7 @@ public class MazeBuilder implements FileProcessor {
 
     public void builder() throws IOException {
         String line;
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        reader = new BufferedReader(new FileReader(fileName));
         int count = 0;
         while ((line = reader.readLine()) != null) {
             loadMaze(line, count, maze);

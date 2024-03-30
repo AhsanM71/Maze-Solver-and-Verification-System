@@ -1,0 +1,129 @@
+@startuml MainConcepts
+!define MyTheme
+skinparam class {
+    BackgroundColor #LightYellow
+    BorderColor #000000
+    FontColor #000000
+}
+
+skinparam stereotypeCBackgroundColor #LightYellow
+skinparam stereotypeCBorderColor #000000
+skinparam stereotypeCFontColor #000000
+
+
+package algorithms{
+    class BFSSol
+
+    interface PathFinder{
+        + mazeSolver(maze: Maze, format: PathFormatter): String 
+    }
+
+    class PathFormatter {
+        + factorizedForm(path: ArrayList<String>): String
+    }
+    class RHRuleSol
+}
+
+package maze{
+    enum CellType{
+        PATH, WALL
+    }
+    interface FileProcessor{
+        + mazeDimension(): int[]
+        + builder(): void
+        + renderMaze(): void
+        + getMaze(): MazeCell[][]
+    }
+    class Maze{
+        + Maze(fileName: String)
+        --
+        + isPathValid(col: int, row: int): boolean
+        + findStartPos(): Position
+        + findEndPos(): Position
+    }
+    class MazeBuilder
+    class MazeCell {
+        + MazeCell(type: CellType)
+    }
+
+}
+
+package maze_runner{
+    enum Direction{
+        NORTH, EAST,
+        SOUTH, WEST
+    }
+    interface Player{
+        + checkForward(maze: Maze): boolean
+        + checkRight(maze: Maze): boolean
+        + isExitReached(): boolean
+        + moveF(): void
+        + turnRight(): void
+        + turnLeft(): void
+    }
+    class Position{
+        + Position(x: int, y: int)
+        + equals(obj: Object): boolean
+        + equals(pos2: Position): boolean
+        + hashCode(): int
+    }
+    class Runner
+
+
+}
+
+package path {
+    class VerifyPath{
+        + VerifyGivenPath(maze: Maze, path: String): boolean
+    }
+
+}
+
+class Configuration{
+    + getPaths(args: String[]): List<String>
+}
+
+class Main
+class SolveFactory{
+    + runMazeSolver(): void
+
+}
+
+' algorithms:
+PathFinder <|.. BFSSol
+PathFinder <|.. RHRuleSol
+PathFormatter -down-> BFSSol
+PathFormatter -down-> RHRuleSol
+
+' maze:
+
+FileProcessor <|.. MazeBuilder
+FileProcessor -up-> Maze
+Maze o--> MazeCell
+MazeCell o--> CellType
+
+' maze_runner:
+Player <|.. Runner
+Runner <-- Direction
+
+Main o--> PathFormatter
+Main o--> SolveFactory
+Main o--> VerifyPath
+Main o-up-> Configuration
+Main o-left-> Maze
+
+SolveFactory o--> PathFinder
+
+SolveFactory <-left- Maze
+SolveFactory <-- PathFormatter
+SolveFactory <-- VerifyPath
+
+VerifyPath o--> Player
+
+BFSSol o-right-> Player
+RHRuleSol o-right-> Player
+
+BFSSol o--> Position
+
+
+@enduml
