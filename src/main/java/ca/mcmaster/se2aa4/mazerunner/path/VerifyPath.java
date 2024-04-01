@@ -21,10 +21,10 @@ public class VerifyPath {
 
         // Checking the path from EAST to WEST and WEST to EAST:
         // Entry is on the west side and exist is east side, runner1 is facing east
-        Player runner1 = new Runner(start.getYVal(), start.getXVal(), Direction.EAST, end.getYVal(), end.getXVal());
+        Player runner1 = new Runner(start, Direction.EAST, end);
 
         // Entry is on the east side and exist is west side, runner1 is facing west
-        Player runner2 = new Runner(end.getYVal(), end.getXVal(), Direction.WEST, start.getYVal(), start.getXVal());
+        Player runner2 = new Runner(end, Direction.WEST, start);
 
         boolean flagWE;
         boolean flagEW;

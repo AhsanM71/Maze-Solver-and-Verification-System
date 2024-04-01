@@ -10,6 +10,7 @@ import ca.mcmaster.se2aa4.mazerunner.algorithms.PathFinder;
 import ca.mcmaster.se2aa4.mazerunner.algorithms.PathFormatter;
 import ca.mcmaster.se2aa4.mazerunner.algorithms.RHRuleSol;
 import ca.mcmaster.se2aa4.mazerunner.benchmarking.Benchmark;
+import ca.mcmaster.se2aa4.mazerunner.benchmarking.Perfomance;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.path.VerifyPath;
 
@@ -18,16 +19,28 @@ public class SolveFactory implements AlgorithmFactory {
     private PathFinder rightHandRule, bfs;
 
     public void runMazeSolver(List<String> paths, Maze maze, PathFormatter format, VerifyPath verify) {
-        String Mazeinput = paths.get(0);
+        String mazeInput = paths.get(0);
         String path = paths.get(1);
         String method = paths.get(2);
         String baseline = paths.get(3);
 
         if (!baseline.equals("null")) {
-            rightHandRule = new RHRuleSol();
-            bfs = new BFSSol();
-            Benchmark benchmark = new Benchmark(bfs, rightHandRule, Mazeinput, format, method, baseline);
-            benchmark.runPerformance();
+            try {
+                verify(method, baseline);
+                rightHandRule = new RHRuleSol();
+                bfs = new BFSSol();
+                Perfomance benchmark;
+                if (method.equals("righthand")) {
+                    benchmark = new Benchmark(rightHandRule, bfs, mazeInput, format, method, baseline);
+                } else {
+                    benchmark = new Benchmark(bfs, rightHandRule, mazeInput, format, method, baseline);
+
+                }
+                benchmark.runPerformance();
+            } catch (IllegalArgumentException e) {
+                System.out.println("An illegal argument exception occurred: " + e.getMessage());
+            }
+
         }
 
         else if (path.equals("null")) {
@@ -54,6 +67,12 @@ public class SolveFactory implements AlgorithmFactory {
             System.out.println(solvedPath);
         } else {
             logger.info("PATH NOT COMPUTED");
+        }
+    }
+
+    private void verify(String m, String b) {
+        if (m.equals(b)) {
+            throw new IllegalArgumentException("benchmarking the same algorithm");
         }
     }
 }

@@ -19,7 +19,7 @@ public class RHRuleSol implements PathFinder {
         start = maze.findStartPos();
         end = maze.findEndPos();
 
-        Player runner = new Runner(start.getYVal(), start.getXVal(), Direction.EAST, end.getYVal(), end.getXVal());
+        Player runner = new Runner(start, Direction.EAST, end);
 
         // WWile loop will stop once runner has reached the end of the maze
         while (!runner.isExitReached()) {

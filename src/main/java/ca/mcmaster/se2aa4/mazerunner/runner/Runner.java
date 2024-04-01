@@ -4,18 +4,14 @@ import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 
 public class Runner implements Player {
     // Current Position of Runner
-    private int currRow;
-    private int currCol;
+    private Position curr;
     // End Position of the maze
-    private int endRow;
-    private int endCol;
+    private Position end;
     private Direction dir;
 
-    public Runner(int currRow, int currCol, Direction dir, int endRow, int endCol) {
-        this.currRow = currRow;
-        this.currCol = currCol;
-        this.endRow = endRow;
-        this.endCol = endCol;
+    public Runner(Position curr, Direction dir, Position end) {
+        this.curr = curr;
+        this.end = end;
         this.dir = dir;
     }
 
@@ -23,8 +19,8 @@ public class Runner implements Player {
     public boolean checkForward(Maze maze) {
         // Obtaining the new row and column positions of the runner after moving forward
         // based on the direction its facing
-        int newRow = currRow + dir.getChangeRow();
-        int newCol = currCol + dir.getChangeCol();
+        int newRow = curr.getYVal() + dir.getChangeRow();
+        int newCol = curr.getXVal() + dir.getChangeCol();
         // Checking if the new position is within the maze and if there is a valid path
         return newRow >= 0 && newRow < maze.getMazeRSize() && newCol >= 0 && newCol < maze.getMazeCSize()
                 && maze.isPathValid(newCol, newRow);
@@ -37,8 +33,8 @@ public class Runner implements Player {
         Direction rightTurn = dir.getRightDir();
         // Obtaining the new row and column positions of the runner after making the
         // right turn and moving forward based on the direction its facing
-        int newRow = currRow + rightTurn.getChangeRow();
-        int newCol = currCol + rightTurn.getChangeCol();
+        int newRow = curr.getYVal() + rightTurn.getChangeRow();
+        int newCol = curr.getXVal() + rightTurn.getChangeCol();
         // Checking if the new position is within the maze and if there is a valid path
         return newRow >= 0 && newRow < maze.getMazeRSize() && newCol >= 0 && newCol < maze.getMazeCSize()
                 && maze.isPathValid(newCol, newRow);
@@ -46,8 +42,8 @@ public class Runner implements Player {
 
     // Moving the runner forward by updating it's current row and column positions
     public void moveF() {
-        currRow += dir.getChangeRow();
-        currCol += dir.getChangeCol();
+        curr.setY(curr.getYVal() + dir.getChangeRow());
+        curr.setX(curr.getXVal() + dir.getChangeCol());
     }
 
     // Turning the runner right by updating its current direction after the right
@@ -64,7 +60,7 @@ public class Runner implements Player {
 
     // Checking if runner has reached the exit
     public boolean isExitReached() {
-        return currRow == endRow && currCol == endCol;
+        return curr.equals(end);
     }
 
     public int x() {

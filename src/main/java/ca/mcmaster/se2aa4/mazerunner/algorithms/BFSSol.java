@@ -26,7 +26,7 @@ public class BFSSol implements PathFinder {
         Queue<Position> queue = new LinkedList<>();
         Position start = maze.findStartPos();
         Position end = maze.findEndPos();
-        Player runner = new Runner(start.getYVal(), start.getXVal(), Direction.EAST, end.getYVal(), end.getXVal());
+        Player runner = new Runner(start, Direction.EAST, end);
         Direction prevDir = runner.getDir();
         queue.add(start);
         visited.add(start);
