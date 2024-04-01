@@ -1,4 +1,4 @@
-package ca.mcmaster.se2aa4.mazerunner.maze_runner;
+package ca.mcmaster.se2aa4.mazerunner.character;
 
 // Enumeration representing the possible directions for runner inside maze
 

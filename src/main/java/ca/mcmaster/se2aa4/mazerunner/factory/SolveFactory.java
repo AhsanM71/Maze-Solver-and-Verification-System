@@ -1,4 +1,4 @@
-package ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner.factory;
 
 import java.util.List;
 
@@ -9,17 +9,28 @@ import ca.mcmaster.se2aa4.mazerunner.algorithms.BFSSol;
 import ca.mcmaster.se2aa4.mazerunner.algorithms.PathFinder;
 import ca.mcmaster.se2aa4.mazerunner.algorithms.PathFormatter;
 import ca.mcmaster.se2aa4.mazerunner.algorithms.RHRuleSol;
+import ca.mcmaster.se2aa4.mazerunner.benchmarking.Benchmark;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.path.VerifyPath;
 
-public class SolveFactory {
+public class SolveFactory implements AlgorithmFactory {
     private static final Logger logger = LogManager.getLogger();
     private PathFinder rightHandRule, bfs;
 
     public void runMazeSolver(List<String> paths, Maze maze, PathFormatter format, VerifyPath verify) {
+        String Mazeinput = paths.get(0);
         String path = paths.get(1);
         String method = paths.get(2);
-        if (path.equals("null")) {
+        String baseline = paths.get(3);
+
+        if (!baseline.equals("null")) {
+            rightHandRule = new RHRuleSol();
+            bfs = new BFSSol();
+            Benchmark benchmark = new Benchmark(bfs, rightHandRule, Mazeinput, format, method, baseline);
+            benchmark.runPerformance();
+        }
+
+        else if (path.equals("null")) {
             if (method.equals("righthand")) {
                 rightHandRule = new RHRuleSol();
                 runMethod(rightHandRule, maze, format);

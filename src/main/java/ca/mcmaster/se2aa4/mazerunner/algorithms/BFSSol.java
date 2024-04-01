@@ -10,11 +10,11 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
+import ca.mcmaster.se2aa4.mazerunner.character.Direction;
+import ca.mcmaster.se2aa4.mazerunner.character.Player;
+import ca.mcmaster.se2aa4.mazerunner.character.Position;
+import ca.mcmaster.se2aa4.mazerunner.character.Runner;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
-import ca.mcmaster.se2aa4.mazerunner.maze_runner.Direction;
-import ca.mcmaster.se2aa4.mazerunner.maze_runner.Player;
-import ca.mcmaster.se2aa4.mazerunner.maze_runner.Position;
-import ca.mcmaster.se2aa4.mazerunner.maze_runner.Runner;
 
 public class BFSSol implements PathFinder {
 
@@ -101,11 +101,6 @@ public class BFSSol implements PathFinder {
                 }
             }
         }
-        String ans = sp.toString();
-        ArrayList<String> path = new ArrayList<>();
-        for (int i = 0; i < ans.length(); i++) {
-            path.add(ans.charAt(i) + "");
-        }
-        return format.factorizedForm(path);
+        return format.factorizedForm(format.strToList(sp.toString()));
     }
 }

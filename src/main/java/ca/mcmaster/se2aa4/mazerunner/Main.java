@@ -6,6 +6,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import ca.mcmaster.se2aa4.mazerunner.algorithms.PathFormatter;
+import ca.mcmaster.se2aa4.mazerunner.factory.AlgorithmFactory;
+import ca.mcmaster.se2aa4.mazerunner.factory.SolveFactory;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.path.VerifyPath;
 
@@ -15,7 +17,7 @@ public class Main {
 
     public static void main(String[] args) {
         PathFormatter format = new PathFormatter();
-        SolveFactory solution = new SolveFactory();
+        AlgorithmFactory solution = new SolveFactory();
         VerifyPath verify = new VerifyPath();
 
         Configuration config = new Configuration();

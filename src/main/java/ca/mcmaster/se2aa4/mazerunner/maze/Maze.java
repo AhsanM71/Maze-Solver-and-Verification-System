@@ -1,6 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner.maze;
 
-import ca.mcmaster.se2aa4.mazerunner.maze_runner.Position;
+import ca.mcmaster.se2aa4.mazerunner.character.Position;
 
 public class Maze {
     private MazeCell[][] maze;

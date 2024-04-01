@@ -1,5 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner.algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PathFormatter {
@@ -29,7 +30,14 @@ public class PathFormatter {
                 count = 1;
             }
         }
-        return conv;
+        return conv.replaceAll("\\s+$", "");
     }
 
+    public List<String> strToList(String path) {
+        List<String> p = new ArrayList<>();
+        for (int i = 0; i < path.length(); i++) {
+            p.add(path.charAt(i) + "");
+        }
+        return p;
+    }
 }

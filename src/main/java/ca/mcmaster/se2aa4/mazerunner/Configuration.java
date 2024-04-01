@@ -19,12 +19,14 @@ public class Configuration {
         optionsI.addOption("i", "input", true, "Reading flag type");
         optionsI.addOption("p", true, "Reading user inputted path");
         optionsI.addOption("method", true, "Reading user requested method");
+        optionsI.addOption("baseline", true, "Reading user requested baseline");
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(optionsI, args);
             paths.add(cmd.getOptionValue("i", "input"));
             paths.add(formatStr(cmd.getOptionValue("p", "null")));
             paths.add(cmd.getOptionValue("method", "righthand"));
+            paths.add(cmd.getOptionValue("baseline", "null"));
         } catch (Exception e) {
             logger.error("An error has occurred");
         }
@@ -33,7 +35,7 @@ public class Configuration {
 
     // Formats the user inputted path in either Canonical or Factorized form and
     // returns the path in Canonical form
-    private String formatStr(String conv) {
+    public String formatStr(String conv) {
         String str = conv.trim().replaceAll("\\s", "");
         String newStr = "";
         if (str.length() == 1) {

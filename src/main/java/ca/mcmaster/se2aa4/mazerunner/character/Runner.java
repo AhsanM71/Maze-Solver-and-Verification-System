@@ -1,4 +1,4 @@
-package ca.mcmaster.se2aa4.mazerunner.maze_runner;
+package ca.mcmaster.se2aa4.mazerunner.character;
 
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 

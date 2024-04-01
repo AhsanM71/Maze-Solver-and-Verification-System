@@ -2,10 +2,11 @@ package ca.mcmaster.se2aa4.mazerunner.algorithms;
 
 import java.util.ArrayList;
 
+import ca.mcmaster.se2aa4.mazerunner.character.Direction;
+import ca.mcmaster.se2aa4.mazerunner.character.Player;
+import ca.mcmaster.se2aa4.mazerunner.character.Position;
+import ca.mcmaster.se2aa4.mazerunner.character.Runner;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
-import ca.mcmaster.se2aa4.mazerunner.maze_runner.Direction;
-import ca.mcmaster.se2aa4.mazerunner.maze_runner.Position;
-import ca.mcmaster.se2aa4.mazerunner.maze_runner.Runner;
 
 public class RHRuleSol implements PathFinder {
 
@@ -18,7 +19,7 @@ public class RHRuleSol implements PathFinder {
         start = maze.findStartPos();
         end = maze.findEndPos();
 
-        Runner runner = new Runner(start.getYVal(), start.getXVal(), Direction.EAST, end.getYVal(), end.getXVal());
+        Player runner = new Runner(start.getYVal(), start.getXVal(), Direction.EAST, end.getYVal(), end.getXVal());
 
         // WWile loop will stop once runner has reached the end of the maze
         while (!runner.isExitReached()) {
