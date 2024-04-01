@@ -12,18 +12,19 @@ import ca.mcmaster.se2aa4.mazerunner.algorithms.RHRuleSol;
 import ca.mcmaster.se2aa4.mazerunner.benchmarking.Benchmark;
 import ca.mcmaster.se2aa4.mazerunner.benchmarking.Perfomance;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
-import ca.mcmaster.se2aa4.mazerunner.path.VerifyPath;
+import ca.mcmaster.se2aa4.mazerunner.path.PathVerifier;
 
 public class SolveFactory implements AlgorithmFactory {
     private static final Logger logger = LogManager.getLogger();
     private PathFinder rightHandRule, bfs;
+    private PathFormatter format;
 
-    public void runMazeSolver(List<String> paths, Maze maze, PathFormatter format, VerifyPath verify) {
+    public void runMazeSolver(List<String> paths, Maze maze, PathVerifier verify) {
         String mazeInput = paths.get(0);
         String path = paths.get(1);
         String method = paths.get(2);
         String baseline = paths.get(3);
-
+        format = new PathFormatter();
         if (!baseline.equals("null")) {
             try {
                 verify(method, baseline);

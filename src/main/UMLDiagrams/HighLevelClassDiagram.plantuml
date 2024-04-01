@@ -12,6 +12,7 @@ skinparam stereotypeCFontColor #000000
 
 
 package algorithms{
+    class RHRuleSol
     class BFSSol
 
     interface PathFinder{
@@ -20,8 +21,26 @@ package algorithms{
 
     class PathFormatter {
         + factorizedForm(path: ArrayList<String>): String
+        + strToList(path: String): List<String>
     }
-    class RHRuleSol
+}
+
+package benchmarking{
+    class Benchmark{
+        
+    }
+    interface Performance {
+        + runPerformance(): void
+    }
+}
+
+package factory{
+    interface AlgorithmFactory{
+        + runMazeSolver(paths: List<String>, maze: Maze, verify: PathVerifier): void
+    }
+    class SolveFactory{
+        + runMazeSolver(): void
+    }
 }
 
 package maze{
@@ -35,20 +54,16 @@ package maze{
         + getMaze(): MazeCell[][]
     }
     class Maze{
-        + Maze(fileName: String)
-        --
         + isPathValid(col: int, row: int): boolean
         + findStartPos(): Position
         + findEndPos(): Position
     }
     class MazeBuilder
-    class MazeCell {
-        + MazeCell(type: CellType)
-    }
 
+    class MazeCell
 }
 
-package maze_runner{
+package runner{
     enum Direction{
         NORTH, EAST,
         SOUTH, WEST
@@ -62,18 +77,16 @@ package maze_runner{
         + turnLeft(): void
     }
     class Position{
-        + Position(x: int, y: int)
         + equals(obj: Object): boolean
-        + equals(pos2: Position): boolean
         + hashCode(): int
     }
     class Runner
-
-
 }
 
 package path {
-    class VerifyPath{
+    class VerifyPath
+
+    interface PathVerifier{
         + VerifyGivenPath(maze: Maze, path: String): boolean
     }
 
@@ -84,46 +97,45 @@ class Configuration{
 }
 
 class Main
-class SolveFactory{
-    + runMazeSolver(): void
-
-}
 
 ' algorithms:
-PathFinder <|.. BFSSol
 PathFinder <|.. RHRuleSol
-PathFormatter -down-> BFSSol
-PathFormatter -down-> RHRuleSol
+PathFinder <|.. BFSSol
+PathFormatter -up-> BFSSol
+PathFormatter -up-> RHRuleSol
 
 ' maze:
-
 FileProcessor <|.. MazeBuilder
-FileProcessor -up-> Maze
+FileProcessor <-up-o Maze
 Maze o--> MazeCell
-MazeCell o--> CellType
+MazeCell <-- CellType
 
-' maze_runner:
+' runner:
 Player <|.. Runner
 Runner <-- Direction
+Runner <-- Position
 
-Main o--> PathFormatter
-Main o--> SolveFactory
-Main o--> VerifyPath
-Main o-up-> Configuration
-Main o-left-> Maze
+' path:
+PathVerifier <|.. VerifyPath
 
-SolveFactory o--> PathFinder
+' factory:
+SolveFactory ..|> AlgorithmFactory
 
-SolveFactory <-left- Maze
-SolveFactory <-- PathFormatter
-SolveFactory <-- VerifyPath
+' benchmarking:
+Benchmark .up.|> Performance
 
-VerifyPath o--> Player
+Main *--up--> AlgorithmFactory
+Main *--down-> PathVerifier
+Main *-left-> Configuration
+Main ---> Maze
 
-BFSSol o-right-> Player
-RHRuleSol o-right-> Player
+SolveFactory *-right-> Performance
+SolveFactory *--> PathFinder
+SolveFactory o--> PathFormatter
 
-BFSSol o--> Position
+VerifyPath *--> Player
 
-
+RHRuleSol *-left-> Player
+BFSSol *--left--> Player
+BFSSol o--right--> Position
 @enduml

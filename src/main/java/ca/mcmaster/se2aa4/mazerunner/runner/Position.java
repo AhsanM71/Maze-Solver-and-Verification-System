@@ -42,9 +42,4 @@ public class Position {
     public int hashCode() {
         return Objects.hash(x, y);
     }
-
-    public boolean equals(Position pos2) {
-        return ((this.getXVal() == pos2.getXVal()) && (this.getYVal() == pos2.getYVal()));
-    }
-
 }
