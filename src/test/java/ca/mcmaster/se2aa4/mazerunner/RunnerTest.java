@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import ca.mcmaster.se2aa4.mazerunner.character.Direction;
-import ca.mcmaster.se2aa4.mazerunner.character.Runner;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
+import ca.mcmaster.se2aa4.mazerunner.runner.Direction;
+import ca.mcmaster.se2aa4.mazerunner.runner.Runner;
 
 public class RunnerTest {
     @Test

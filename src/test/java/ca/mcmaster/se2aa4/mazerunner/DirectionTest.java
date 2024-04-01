@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import ca.mcmaster.se2aa4.mazerunner.character.Direction;
+import ca.mcmaster.se2aa4.mazerunner.runner.Direction;
 
 public class DirectionTest {
     @Test

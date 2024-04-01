@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import ca.mcmaster.se2aa4.mazerunner.character.Position;
+import ca.mcmaster.se2aa4.mazerunner.runner.Position;
 
 public class PositionTest {
     @Test

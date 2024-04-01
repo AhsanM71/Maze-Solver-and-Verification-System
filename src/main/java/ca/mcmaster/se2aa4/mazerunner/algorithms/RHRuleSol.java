@@ -2,11 +2,11 @@ package ca.mcmaster.se2aa4.mazerunner.algorithms;
 
 import java.util.ArrayList;
 
-import ca.mcmaster.se2aa4.mazerunner.character.Direction;
-import ca.mcmaster.se2aa4.mazerunner.character.Player;
-import ca.mcmaster.se2aa4.mazerunner.character.Position;
-import ca.mcmaster.se2aa4.mazerunner.character.Runner;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
+import ca.mcmaster.se2aa4.mazerunner.runner.Direction;
+import ca.mcmaster.se2aa4.mazerunner.runner.Player;
+import ca.mcmaster.se2aa4.mazerunner.runner.Position;
+import ca.mcmaster.se2aa4.mazerunner.runner.Runner;
 
 public class RHRuleSol implements PathFinder {
 

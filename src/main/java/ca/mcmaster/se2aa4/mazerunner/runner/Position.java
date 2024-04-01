@@ -1,4 +1,4 @@
-package ca.mcmaster.se2aa4.mazerunner.character;
+package ca.mcmaster.se2aa4.mazerunner.runner;
 
 import java.util.Objects;
 
