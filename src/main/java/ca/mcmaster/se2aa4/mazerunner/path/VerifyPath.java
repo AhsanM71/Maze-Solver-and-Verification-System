@@ -9,7 +9,7 @@ import ca.mcmaster.se2aa4.mazerunner.runner.Player;
 import ca.mcmaster.se2aa4.mazerunner.runner.Position;
 import ca.mcmaster.se2aa4.mazerunner.runner.Runner;
 
-public class VerifyPath {
+public class VerifyPath implements PathVerifier {
     private final Logger logger = LogManager.getLogger();
 
     // Method tha verifies a user inputted path as a correct or incorrect solution
