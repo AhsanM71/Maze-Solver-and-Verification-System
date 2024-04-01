@@ -57,13 +57,13 @@ public class BFSSol implements PathFinder {
         return shortestPath(shortestPath, prevDir, format);
     }
 
-    public boolean isValid(int newX, int newY, int rows, int cols, Position neighbour, Maze maze,
+    private boolean isValid(int newX, int newY, int rows, int cols, Position neighbour, Maze maze,
             Set<Position> visited) {
         return newX >= 0 && newX < cols && newY >= 0 && newY < rows && maze.isPathValid(newX, newY)
                 && !visited.contains(neighbour);
     }
 
-    public String shortestPath(List<Position> path, Direction prevDir, PathFormatter format) {
+    private String shortestPath(List<Position> path, Direction prevDir, PathFormatter format) {
         List<Direction> directions = new ArrayList<>();
         for (int i = 1; i < path.size(); i++) {
             Position prev = path.get(i - 1);
@@ -76,16 +76,15 @@ public class BFSSol implements PathFinder {
             } else if (dy == 0 && dx == -1) {
                 directions.add(Direction.WEST);
             } else if (dy == 1 && dx == 0) {
-                directions.add(Direction.WEST);
+                directions.add(Direction.SOUTH);
             } else if (dy == -1 && dx == 0) {
                 directions.add(Direction.NORTH);
             }
-
         }
         return converter(directions, prevDir, format);
     }
 
-    public String converter(List<Direction> directions, Direction prevDir, PathFormatter format) {
+    private String converter(List<Direction> directions, Direction prevDir, PathFormatter format) {
         StringBuilder sp = new StringBuilder();
         for (int i = 0; i < directions.size(); i++) {
             Direction dir = directions.get(i);
