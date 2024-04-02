@@ -16,7 +16,8 @@ import ca.mcmaster.se2aa4.mazerunner.path.PathVerifier;
 
 public class SolveFactory implements AlgorithmFactory {
     private static final Logger logger = LogManager.getLogger();
-    private PathFinder rightHandRule, bfs;
+    private PathFinder rightHandRule;
+    private PathFinder bfs;
     private PathFormatter format;
 
     public void runMazeSolver(List<String> paths, Maze maze, PathVerifier verify) {

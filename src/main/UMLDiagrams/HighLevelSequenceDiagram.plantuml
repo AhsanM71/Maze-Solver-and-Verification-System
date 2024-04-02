@@ -1,0 +1,55 @@
+@startuml Sequence
+
+    participant Explorer
+    participant Search
+    participant Phase
+    participant Map
+    participant Report
+    
+    -> Explorer ++: initialize(s: String)
+    <-- Explorer
+
+    group loop [command != stop] 
+    -> Explorer: takeDecision()
+
+    Explorer -> Search ++: performSearch()
+
+    Search -> Phase  ++: isLastPhase()
+    Search <- Phase: return last
+
+    Search -> Phase: isFinished()
+    Search <- Phase : return finished
+
+    Search -> Phase: [finished = true] getNextPhase()
+    Search <-- Phase: return phase
+
+    Search -> Phase : getDroneCommand()
+    Search <-- Phase : return command
+
+    Explorer <-- Search: return command
+
+    <-- Explorer: return command
+
+    -> Explorer: acknowledgeResults(s: String)
+
+    Explorer -> Search: readResponse(response: JSONObject, map: Map)
+
+    Search -> Phase: processInfo(response: JSONObject)
+    Search <-- Phase --
+
+    Search -> Map ++: addPOI()
+    Search <-- Map --
+
+    Explorer <-- Search --
+
+    <-- Explorer
+    end
+
+    -> Explorer: deliverFinalReport()
+
+    Explorer -> Report ++: generateReport(map: Map)
+    Explorer <-- Report --: return report
+
+    <-- Explorer: return report
+
+@enduml

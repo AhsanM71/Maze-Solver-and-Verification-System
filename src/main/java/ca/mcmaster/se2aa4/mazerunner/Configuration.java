@@ -37,7 +37,7 @@ public class Configuration {
     // returns the path in Canonical form
     public String formatStr(String conv) {
         String str = conv.trim().replaceAll("\\s", "");
-        String newStr = "";
+        StringBuffer sb = new StringBuffer();
         if (str.length() == 1) {
             return str;
         }
@@ -52,7 +52,7 @@ public class Configuration {
                 // Retrieving the character
                 char getChar = str.charAt(i + 2);
                 // Appending the character getChar, n times to the String newStr
-                newStr += Character.toString(getChar).repeat(n);
+                sb.append(Character.toString(getChar).repeat(n));
                 // Skipping to the next digit sequence in the String conv
                 i += 2;
                 // Else if condition checks if the digit in fron of character is a digit
@@ -61,14 +61,14 @@ public class Configuration {
                 int num = Character.getNumericValue(c);
                 char c2 = str.charAt(i + 1);
                 // Appending the character getChar, n times to the String newStr
-                newStr += Character.toString(c2).repeat(num);
+                sb.append(Character.toString(c2).repeat(num));
                 // Skipping to the next digit sequence in the String conv
                 i += 1;
                 // Else condition get's executed if there are no digits in front of the
                 // character (Ex: R)
             } else {
                 // Appending the single character c to the String newStr
-                newStr += c;
+                sb.append(c);
             }
         }
         // if condition test's an edge case where if the last character in the String
@@ -76,8 +76,8 @@ public class Configuration {
         // case is cause by the iterations of i from the for loop
         if (!Character.isDigit(str.charAt(str.length() - 2))) {
             // Append the last character to the String.
-            newStr += str.charAt(str.length() - 1);
+            sb.append(str.charAt(str.length() - 1));
         }
-        return newStr;
+        return sb.toString();
     }
 }

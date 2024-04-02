@@ -11,7 +11,7 @@ import ca.mcmaster.se2aa4.mazerunner.runner.Runner;
 
 public class RunnerTest {
     @Test
-    public void checkForwardTest() {
+    void checkForwardTest() {
         Maze maze = new Maze("./examples/tiny.maz.txt");
         Position start = new Position(0, 5);
         Position end = new Position(6, 1);

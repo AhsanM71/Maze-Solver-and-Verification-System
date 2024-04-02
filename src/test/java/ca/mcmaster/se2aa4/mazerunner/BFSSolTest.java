@@ -11,7 +11,7 @@ import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 
 public class BFSSolTest {
     @Test
-    public void mazeSolverTest1() {
+    void mazeSolverTest1() {
         PathFinder bfs = new BFSSol();
         Maze maze = new Maze("./examples/tiny.maz.txt");
         PathFormatter format = new PathFormatter();
@@ -20,7 +20,7 @@ public class BFSSolTest {
     }
 
     @Test
-    public void mazeSolverTest2() {
+    void mazeSolverTest2() {
         PathFinder bfs = new BFSSol();
         Maze maze = new Maze("./examples/giant.maz.txt");
         PathFormatter format = new PathFormatter();

@@ -5,29 +5,27 @@ import org.junit.jupiter.api.Test;
 import ca.mcmaster.se2aa4.mazerunner.algorithms.PathFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class PathFormatterTest {
     @Test
-    public void factorizedFormTest1() {
+    void factorizedFormTest1() {
         PathFormatter formatter = new PathFormatter();
         String path = "FFFRRRLLLFLFLRFRFFFF";
         assertEquals("3F 3R 3L F L F L R F R 4F", formatter.factorizedForm(formatter.strToList(path)));
     }
 
     @Test
-    public void factorizedFormTest2() {
+    void factorizedFormTest2() {
         PathFormatter formatter = new PathFormatter();
         String path = "FFFFFFFFFFFFFFRRRRRRRRRRRRRR";
         assertEquals("14F 14R", formatter.factorizedForm(formatter.strToList(path)));
     }
 
     @Test
-    public void strToListTest() {
+    void strToListTest() {
         PathFormatter formatter = new PathFormatter();
         String path = "FFFRRRLFLFL";
         List<String> correct = new ArrayList<>();

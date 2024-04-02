@@ -54,8 +54,7 @@ public class Benchmark implements Perfomance {
     }
 
     private Maze loadingMazeTime(String mazeInput) {
-        Maze maze = new Maze(mazeInput);
-        return maze;
+        return new Maze(mazeInput);
     }
 
     private String testExploring(PathFinder algo, Maze maze, PathFormatter format, String method) {
@@ -75,8 +74,7 @@ public class Benchmark implements Perfomance {
     }
 
     private String exploringMazeMethod(PathFinder algo, Maze maze, PathFormatter format) {
-        String solvedPath = algo.mazeSolver(maze, format);
-        return solvedPath;
+        return algo.mazeSolver(maze, format);
     }
 
 }
