@@ -67,7 +67,13 @@ public class MazeBuilder implements FileProcessor {
     }
 
     public MazeCell[][] getMaze() {
-        return maze;
+        MazeCell[][] copy = new MazeCell[maze.length][maze[0].length];
+        for (int i = 0; i < copy.length; i++) {
+            for (int j = 0; j < copy.length; j++) {
+                copy[i][j] = maze[i][j];
+            }
+        }
+        return copy;
     }
 
     private void initialize() {
