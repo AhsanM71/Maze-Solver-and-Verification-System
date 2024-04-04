@@ -11,13 +11,13 @@ public class PathTest {
     @Test
     void factorizedFormTest1() {
         Path path = new Path("FFFRRRLLLFLFLRFRFFFF");
-        assertEquals("3F 3R 3L F L F L R F R 4F", path.canonicalToFactorized());
+        assertEquals("3F 3R 3L F L F L R F R 4F ", path.canonicalToFactorized());
     }
 
     @Test
     void factorizedFormTest2() {
         Path path = new Path("FFFFFFFFFFFFFFRRRRRRRRRRRRRR");
-        assertEquals("14F 14R", path.canonicalToFactorized());
+        assertEquals("14F 14R ", path.canonicalToFactorized());
     }
 
     @Test

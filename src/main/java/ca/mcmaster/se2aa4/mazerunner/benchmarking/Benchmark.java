@@ -3,19 +3,17 @@ package ca.mcmaster.se2aa4.mazerunner.benchmarking;
 import java.text.DecimalFormat;
 
 import ca.mcmaster.se2aa4.mazerunner.Path;
+import ca.mcmaster.se2aa4.mazerunner.algorithms.BFSSol;
 import ca.mcmaster.se2aa4.mazerunner.algorithms.PathFinder;
+import ca.mcmaster.se2aa4.mazerunner.algorithms.RHRuleSol;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 
 public class Benchmark implements Perfomance {
-    private PathFinder method;
-    private PathFinder baseline;
     private String fileInput;
     private String m;
     private String b;
 
-    public Benchmark(PathFinder method, PathFinder baseline, String fileInput, String m, String b) {
-        this.method = method;
-        this.baseline = baseline;
+    public Benchmark(String fileInput, String m, String b) {
         this.fileInput = fileInput;
         this.m = m;
         this.b = b;
@@ -23,8 +21,21 @@ public class Benchmark implements Perfomance {
 
     public void runPerformance() {
         Maze maze = testLoading();
-        Path baselinePath = testExploring(baseline, maze, b);
-        Path methodPath = testExploring(method, maze, m);
+        Path methodPath;
+        Path baselinePath;
+
+        if (m.equals("BFS")) {
+            methodPath = testExploring(new BFSSol(), maze, m);
+        } else {
+            methodPath = testExploring(new RHRuleSol(), maze, m);
+        }
+
+        if (b.equals("BFS")) {
+            baselinePath = testExploring(new BFSSol(), maze, b);
+        } else {
+            baselinePath = testExploring(new RHRuleSol(), maze, b);
+        }
+
         testSpeedUp(methodPath, baselinePath);
     }
 
@@ -52,6 +63,7 @@ public class Benchmark implements Perfomance {
 
     private Path testExploring(PathFinder algo, Maze maze, String method) {
         DecimalFormat df = new DecimalFormat("0.##");
+
         Path format = new Path("");
         long startTime = System.nanoTime();
 

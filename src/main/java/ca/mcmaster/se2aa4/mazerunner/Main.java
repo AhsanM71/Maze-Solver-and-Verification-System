@@ -19,15 +19,15 @@ public class Main {
         AlgorithmFactory solution = new SolveFactory();
         PathVerifier verify = new VerifyPath();
         Configuration config = new Configuration();
-
-        List<String> info = config.getPaths(args);
-        Maze maze = new Maze(info.get(0));
+        config.getPaths(args);
+        String input = config.getInput();
+        Maze maze = new Maze(input);
 
         try {
-            solution.runMazeSolver(info, maze, verify);
+            solution.runMazeSolver(config, maze, verify);
         } catch (Exception e) {
             logger.info("** Starting Maze Runner");
-            logger.info("**** Reading the maze from file" + info.get(0));
+            logger.info("**** Reading the maze from file" + input);
             logger.info("**** Computing path");
             logger.info("PATH NOT COMPUTED");
             logger.info("** End of MazeRunner");

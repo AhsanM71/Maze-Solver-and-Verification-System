@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Configuration {
     private final Logger logger = LogManager.getLogger();
-
+    private List<String> paths = new ArrayList<>();;
     private Options options;
 
     public Configuration() {
@@ -23,8 +23,7 @@ public class Configuration {
         options.addOption("b", "baseline", true, "Reading user requested baseline");
     }
 
-    public List<String> getPaths(String[] args) {
-        List<String> paths = new ArrayList<>();
+    public void getPaths(String[] args) {
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd;
         try {
@@ -36,7 +35,22 @@ public class Configuration {
         } catch (Exception e) {
             logger.error("An error has occurred");
         }
-        return paths;
+    }
+
+    public String getInput() {
+        return paths.get(0);
+    }
+
+    public String getPath() {
+        return paths.get(1);
+    }
+
+    public String getMethod() {
+        return paths.get(2);
+    }
+
+    public String getBaseline() {
+        return paths.get(3);
     }
 
     private String getOptionValue(CommandLine cmd, OptionType optionType) {

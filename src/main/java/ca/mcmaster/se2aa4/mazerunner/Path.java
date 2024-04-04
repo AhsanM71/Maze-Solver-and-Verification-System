@@ -82,7 +82,7 @@ public class Path {
                 count = 1;
             }
         }
-        return sb.toString().replaceAll("\\s+$", "");
+        return sb.toString();
     }
 
     public List<String> strToList(String path) {
