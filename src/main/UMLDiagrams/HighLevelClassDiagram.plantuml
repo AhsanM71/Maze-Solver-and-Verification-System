@@ -16,12 +16,7 @@ package algorithms{
     class BFSSol
 
     interface PathFinder{
-        + mazeSolver(maze: Maze, format: PathFormatter): String 
-    }
-
-    class PathFormatter {
-        + factorizedForm(path: ArrayList<String>): String
-        + strToList(path: String): List<String>
+        + mazeSolver(maze: Maze, format: Path): String 
     }
 }
 
@@ -83,11 +78,11 @@ package runner{
     class Runner
 }
 
-package path {
+package verification {
     class VerifyPath
 
     interface PathVerifier{
-        + VerifyGivenPath(maze: Maze, path: String): boolean
+        + VerifyGivenPath(maze: Maze, p: Path): boolean
     }
 
 }
@@ -98,11 +93,18 @@ class Configuration{
 
 class Main
 
+class Path {
+    + factorizedToCanonical(): String
+    + canonicalToFactorized(): String
+    + strToList(path: String): List<String>
+    + listToStr(path: List<String>): String
+}
+
 ' algorithms:
 PathFinder <|.. RHRuleSol
 PathFinder <|.. BFSSol
-PathFormatter -up-> BFSSol
-PathFormatter -up-> RHRuleSol
+Path -right-> BFSSol
+Path -up-> RHRuleSol
 
 ' maze:
 FileProcessor <|.. MazeBuilder
@@ -112,8 +114,8 @@ MazeCell <-- CellType
 
 ' runner:
 Player <|.. Runner
-Runner <-- Direction
-Runner <-- Position
+Runner <-left- Direction
+Runner <-right- Position
 
 ' path:
 PathVerifier <|.. VerifyPath
@@ -125,17 +127,20 @@ SolveFactory ..left..|> AlgorithmFactory
 Benchmark .up.|> Performance
 
 Main *-left-> AlgorithmFactory
-Main *--down-> PathVerifier
+Main *-down-> PathVerifier
 Main *-left-> Configuration
-Main *---> Maze
+Main *--> Maze
 
 SolveFactory *--right--> Performance
 SolveFactory *--> PathFinder
-SolveFactory o--> PathFormatter
+SolveFactory o--> Path
 
-VerifyPath *--> Player
+VerifyPath *---> Player
+VerifyPath --right-> Path
 
 RHRuleSol *-left-> Player
-BFSSol *--left--> Player
-BFSSol o--right--> Position
+BFSSol *-down-> Player
+BFSSol o-right-> Position
+
+Benchmark --> Path
 @enduml

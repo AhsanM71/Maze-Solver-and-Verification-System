@@ -29,8 +29,8 @@ public class VerifyPath implements PathVerifier {
 
         boolean flagWE;
         boolean flagEW;
-        flagWE = pathVerifier(p.factorizedToCanonical(), maze, true, runner1);
-        flagEW = pathVerifier(p.factorizedToCanonical(), maze, true, runner2);
+        flagWE = pathVerifier(p, maze, true, runner1);
+        flagEW = pathVerifier(p, maze, true, runner2);
 
         // Return true if the user inputted path is valid from the direction EAST to
         // WEST or WEST to EAST
@@ -38,8 +38,8 @@ public class VerifyPath implements PathVerifier {
     }
 
     // This helper function actually checks the user inputted path
-    private boolean pathVerifier(String path, Maze maze, Boolean isValid, Player runner) {
-        path = path.toUpperCase();
+    private boolean pathVerifier(Path p, Maze maze, Boolean isValid, Player runner) {
+        String path = p.getPath().toUpperCase();
         boolean flag = true;
         for (int i = 0; i < path.length(); i++) {
             try {

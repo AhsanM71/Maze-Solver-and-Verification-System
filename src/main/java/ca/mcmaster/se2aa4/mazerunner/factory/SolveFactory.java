@@ -16,8 +16,6 @@ import ca.mcmaster.se2aa4.mazerunner.verification.PathVerifier;
 
 public class SolveFactory implements AlgorithmFactory {
     private static final Logger logger = LogManager.getLogger();
-    private PathFinder rightHandRule;
-    private PathFinder bfs;
 
     public void runMazeSolver(List<String> paths, Maze maze, PathVerifier verify) {
         String mazeInput = paths.get(0);
@@ -25,6 +23,8 @@ public class SolveFactory implements AlgorithmFactory {
         String method = paths.get(2);
         String baseline = paths.get(3);
         Path p = new Path(path);
+        PathFinder rightHandRule;
+        PathFinder bfs;
 
         if (!baseline.equals("null")) {
             try {
@@ -54,9 +54,7 @@ public class SolveFactory implements AlgorithmFactory {
                 runMethod(bfs, maze, p);
             }
         } else {
-
-            Boolean isValid = verify.verifyGivenPath(maze, p);
-            if (isValid) {
+            if (verify.verifyGivenPath(maze, p)) {
                 System.out.println("correct path");
             } else {
                 System.out.println("incorrect path");

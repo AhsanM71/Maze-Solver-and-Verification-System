@@ -12,7 +12,7 @@ public class Path {
 
     public String factorizedToCanonical() {
         String path = str.trim().replaceAll("\\s", "");
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if (path.length() == 1) {
             return path;
         }
@@ -61,7 +61,7 @@ public class Path {
         // to ensure the String get's formatted correctly
         List<String> path = strToList(str);
         path.add("null");
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         int count = 1;
         for (int i = 0; i < path.size() - 1; i++) {
             // Checking if the neighbouring characters are the same
@@ -98,7 +98,7 @@ public class Path {
     }
 
     public String listToStr(List<String> path) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < path.size(); i++) {
             sb.append(path.get(i));
         }

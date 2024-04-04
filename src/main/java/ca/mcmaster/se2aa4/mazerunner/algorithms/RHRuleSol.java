@@ -1,6 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner.algorithms;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ca.mcmaster.se2aa4.mazerunner.Path;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
@@ -12,7 +13,7 @@ import ca.mcmaster.se2aa4.mazerunner.runner.Runner;
 public class RHRuleSol implements PathFinder {
 
     public Path mazeSolver(Maze maze, Path format) {
-        ArrayList<String> path = new ArrayList<>();
+        List<String> path = new ArrayList<>();
 
         Position start = null;
         Position end = null;

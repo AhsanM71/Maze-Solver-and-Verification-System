@@ -3,14 +3,15 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.cli.*;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Configuration {
+    private final Logger logger = LogManager.getLogger();
 
     private Options options;
 
@@ -32,8 +33,8 @@ public class Configuration {
             paths.add(getOptionValue(cmd, OptionType.PATH));
             paths.add(getOptionValue(cmd, OptionType.METHOD));
             paths.add(getOptionValue(cmd, OptionType.BASELINE));
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            logger.error("An error has occurred");
         }
         return paths;
     }
