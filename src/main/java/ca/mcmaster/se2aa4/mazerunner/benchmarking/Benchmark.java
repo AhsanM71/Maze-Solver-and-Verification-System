@@ -2,38 +2,35 @@ package ca.mcmaster.se2aa4.mazerunner.benchmarking;
 
 import java.text.DecimalFormat;
 
+import ca.mcmaster.se2aa4.mazerunner.Path;
 import ca.mcmaster.se2aa4.mazerunner.algorithms.PathFinder;
-import ca.mcmaster.se2aa4.mazerunner.algorithms.PathFormatter;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 
 public class Benchmark implements Perfomance {
     private PathFinder method;
     private PathFinder baseline;
-    private String input;
-    private PathFormatter format;
+    private String fileInput;
     private String m;
     private String b;
 
-    public Benchmark(PathFinder method, PathFinder baseline, String input, PathFormatter format, String m,
-            String b) {
+    public Benchmark(PathFinder method, PathFinder baseline, String fileInput, String m, String b) {
         this.method = method;
         this.baseline = baseline;
-        this.input = input;
-        this.format = format;
+        this.fileInput = fileInput;
         this.m = m;
         this.b = b;
     }
 
     public void runPerformance() {
         Maze maze = testLoading();
-        String baselinePath = testExploring(baseline, maze, format, b);
-        String methodPath = testExploring(method, maze, format, m);
+        Path baselinePath = testExploring(baseline, maze, b);
+        Path methodPath = testExploring(method, maze, m);
         testSpeedUp(methodPath, baselinePath);
     }
 
-    private void testSpeedUp(String mPath, String bPath) {
+    private void testSpeedUp(Path mPath, Path bPath) {
         DecimalFormat df = new DecimalFormat("0.##");
-        double ans = bPath.length() * 1.0 / mPath.length();
+        double ans = bPath.getPath().length() * 1.0 / mPath.getPath().length();
         String formattedNumber = df.format(ans);
         System.out.println("The Speedup result: " + formattedNumber);
     }
@@ -42,7 +39,7 @@ public class Benchmark implements Perfomance {
         DecimalFormat df = new DecimalFormat("0.##");
         long startTime = System.nanoTime();
 
-        Maze maze = loadingMazeTime(input);
+        Maze maze = new Maze(fileInput);
 
         long endTime = System.nanoTime();
         long duration = endTime - startTime;
@@ -53,16 +50,12 @@ public class Benchmark implements Perfomance {
         return maze;
     }
 
-    private Maze loadingMazeTime(String mazeInput) {
-        return new Maze(mazeInput);
-    }
-
-    private String testExploring(PathFinder algo, Maze maze, PathFormatter format, String method) {
+    private Path testExploring(PathFinder algo, Maze maze, String method) {
         DecimalFormat df = new DecimalFormat("0.##");
+        Path format = new Path("");
         long startTime = System.nanoTime();
 
-        String path = exploringMazeMethod(algo, maze, format);
-
+        Path path = algo.mazeSolver(maze, format);
         long endTime = System.nanoTime();
         long duration = endTime - startTime;
 
@@ -72,9 +65,4 @@ public class Benchmark implements Perfomance {
                 + " milliseconds");
         return path;
     }
-
-    private String exploringMazeMethod(PathFinder algo, Maze maze, PathFormatter format) {
-        return algo.mazeSolver(maze, format);
-    }
-
 }

@@ -8,8 +8,8 @@ import org.apache.logging.log4j.Logger;
 import ca.mcmaster.se2aa4.mazerunner.factory.AlgorithmFactory;
 import ca.mcmaster.se2aa4.mazerunner.factory.SolveFactory;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
-import ca.mcmaster.se2aa4.mazerunner.path.PathVerifier;
-import ca.mcmaster.se2aa4.mazerunner.path.VerifyPath;
+import ca.mcmaster.se2aa4.mazerunner.verification.PathVerifier;
+import ca.mcmaster.se2aa4.mazerunner.verification.VerifyPath;
 
 public class Main {
 
@@ -20,16 +20,14 @@ public class Main {
         PathVerifier verify = new VerifyPath();
         Configuration config = new Configuration();
 
-        List<String> paths = config.getPaths(args);
-        String input = paths.get(0);
-
-        Maze maze = new Maze(input);
+        List<String> info = config.getPaths(args);
+        Maze maze = new Maze(info.get(0));
 
         try {
-            solution.runMazeSolver(paths, maze, verify);
+            solution.runMazeSolver(info, maze, verify);
         } catch (Exception e) {
             logger.info("** Starting Maze Runner");
-            logger.info("**** Reading the maze from file" + input);
+            logger.info("**** Reading the maze from file" + info.get(0));
             logger.info("**** Computing path");
             logger.info("PATH NOT COMPUTED");
             logger.info("** End of MazeRunner");

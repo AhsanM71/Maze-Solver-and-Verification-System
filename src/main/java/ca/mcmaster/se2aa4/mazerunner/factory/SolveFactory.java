@@ -5,27 +5,27 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import ca.mcmaster.se2aa4.mazerunner.Path;
 import ca.mcmaster.se2aa4.mazerunner.algorithms.BFSSol;
 import ca.mcmaster.se2aa4.mazerunner.algorithms.PathFinder;
-import ca.mcmaster.se2aa4.mazerunner.algorithms.PathFormatter;
 import ca.mcmaster.se2aa4.mazerunner.algorithms.RHRuleSol;
 import ca.mcmaster.se2aa4.mazerunner.benchmarking.Benchmark;
 import ca.mcmaster.se2aa4.mazerunner.benchmarking.Perfomance;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
-import ca.mcmaster.se2aa4.mazerunner.path.PathVerifier;
+import ca.mcmaster.se2aa4.mazerunner.verification.PathVerifier;
 
 public class SolveFactory implements AlgorithmFactory {
     private static final Logger logger = LogManager.getLogger();
     private PathFinder rightHandRule;
     private PathFinder bfs;
-    private PathFormatter format;
 
     public void runMazeSolver(List<String> paths, Maze maze, PathVerifier verify) {
         String mazeInput = paths.get(0);
         String path = paths.get(1);
         String method = paths.get(2);
         String baseline = paths.get(3);
-        format = new PathFormatter();
+        Path p = new Path(path);
+
         if (!baseline.equals("null")) {
             try {
                 verify(method, baseline);
@@ -33,9 +33,9 @@ public class SolveFactory implements AlgorithmFactory {
                 bfs = new BFSSol();
                 Perfomance benchmark;
                 if (method.equals("righthand")) {
-                    benchmark = new Benchmark(rightHandRule, bfs, mazeInput, format, method, baseline);
+                    benchmark = new Benchmark(rightHandRule, bfs, mazeInput, method, baseline);
                 } else {
-                    benchmark = new Benchmark(bfs, rightHandRule, mazeInput, format, method, baseline);
+                    benchmark = new Benchmark(bfs, rightHandRule, mazeInput, method, baseline);
 
                 }
                 benchmark.runPerformance();
@@ -48,13 +48,14 @@ public class SolveFactory implements AlgorithmFactory {
         else if (path.equals("null")) {
             if (method.equals("righthand")) {
                 rightHandRule = new RHRuleSol();
-                runMethod(rightHandRule, maze, format);
+                runMethod(rightHandRule, maze, p);
             } else if (method.equals("BFS")) {
                 bfs = new BFSSol();
-                runMethod(bfs, maze, format);
+                runMethod(bfs, maze, p);
             }
         } else {
-            Boolean isValid = verify.verifyGivenPath(maze, path);
+
+            Boolean isValid = verify.verifyGivenPath(maze, p);
             if (isValid) {
                 System.out.println("correct path");
             } else {
@@ -63,10 +64,10 @@ public class SolveFactory implements AlgorithmFactory {
         }
     }
 
-    private void runMethod(PathFinder algo, Maze maze, PathFormatter format) {
-        String solvedPath = algo.mazeSolver(maze, format);
-        if (solvedPath.length() > -1) {
-            System.out.println(solvedPath);
+    private void runMethod(PathFinder algo, Maze maze, Path format) {
+        Path solvedPath = algo.mazeSolver(maze, format);
+        if (solvedPath.getPath().length() > -1) {
+            System.out.println(format.canonicalToFactorized());
         } else {
             logger.info("PATH NOT COMPUTED");
         }

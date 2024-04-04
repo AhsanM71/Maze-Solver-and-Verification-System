@@ -1,8 +1,9 @@
-package ca.mcmaster.se2aa4.mazerunner.path;
+package ca.mcmaster.se2aa4.mazerunner.verification;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import ca.mcmaster.se2aa4.mazerunner.Path;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.runner.Direction;
 import ca.mcmaster.se2aa4.mazerunner.runner.Player;
@@ -14,7 +15,7 @@ public class VerifyPath implements PathVerifier {
 
     // Method tha verifies a user inputted path as a correct or incorrect solution
     // of the maze
-    public boolean verifyGivenPath(Maze maze, String path) {
+    public boolean verifyGivenPath(Maze maze, Path p) {
         // Obtaining the start and end positions of the maze
         Position start = maze.findStartPos();
         Position end = maze.findEndPos();
@@ -28,9 +29,8 @@ public class VerifyPath implements PathVerifier {
 
         boolean flagWE;
         boolean flagEW;
-
-        flagWE = pathVerifier(path, maze, true, runner1);
-        flagEW = pathVerifier(path, maze, true, runner2);
+        flagWE = pathVerifier(p.factorizedToCanonical(), maze, true, runner1);
+        flagEW = pathVerifier(p.factorizedToCanonical(), maze, true, runner2);
 
         // Return true if the user inputted path is valid from the direction EAST to
         // WEST or WEST to EAST

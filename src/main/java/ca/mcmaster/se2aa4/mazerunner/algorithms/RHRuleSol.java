@@ -2,6 +2,7 @@ package ca.mcmaster.se2aa4.mazerunner.algorithms;
 
 import java.util.ArrayList;
 
+import ca.mcmaster.se2aa4.mazerunner.Path;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.runner.Direction;
 import ca.mcmaster.se2aa4.mazerunner.runner.Player;
@@ -10,7 +11,7 @@ import ca.mcmaster.se2aa4.mazerunner.runner.Runner;
 
 public class RHRuleSol implements PathFinder {
 
-    public String mazeSolver(Maze maze, PathFormatter format) {
+    public Path mazeSolver(Maze maze, Path format) {
         ArrayList<String> path = new ArrayList<>();
 
         Position start = null;
@@ -45,6 +46,7 @@ public class RHRuleSol implements PathFinder {
         }
         // Calling the factroizedForm method to get the path from Canonical form to
         // Factorized form
-        return format.factorizedForm(path);
+        format.setPath(format.listToStr(path));
+        return format;
     }
 }
