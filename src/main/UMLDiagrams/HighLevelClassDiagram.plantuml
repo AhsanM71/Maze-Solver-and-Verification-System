@@ -119,12 +119,12 @@ Runner <-- Position
 PathVerifier <|.. VerifyPath
 
 ' factory:
-SolveFactory ..|> AlgorithmFactory
+SolveFactory .left.|> AlgorithmFactory
 
 ' benchmarking:
 Benchmark .up.|> Performance
 
-Main *--up--> AlgorithmFactory
+Main *--left--> AlgorithmFactory
 Main *--down-> PathVerifier
 Main *-left-> Configuration
 Main ---> Maze
