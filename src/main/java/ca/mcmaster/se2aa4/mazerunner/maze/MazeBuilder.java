@@ -24,12 +24,9 @@ public class MazeBuilder implements FileProcessor {
             dimensions = mazeDimension();
             maze = new MazeCell[dimensions[0]][dimensions[1]];
             initialize();
-            printMaze();
-            System.out.println();
             builder();
-            printMaze();
         } catch (Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
+            logger.error("/!\\ An error has occured /!\\ ");
         }
     }
 
@@ -72,7 +69,7 @@ public class MazeBuilder implements FileProcessor {
     public MazeCell[][] getMaze() {
         MazeCell[][] copy = new MazeCell[maze.length][maze[0].length];
         for (int i = 0; i < copy.length; i++) {
-            for (int j = 0; j < copy.length; j++) {
+            for (int j = 0; j < copy[0].length; j++) {
                 copy[i][j] = maze[i][j];
             }
         }
@@ -80,25 +77,10 @@ public class MazeBuilder implements FileProcessor {
     }
 
     private void initialize() {
-        System.out.println("row:" + dimensions[0]);
-        System.out.println("col:" + dimensions[1]);
         for (int i = 0; i < dimensions[0]; i++) {
             for (int j = 0; j < dimensions[1]; j++) {
                 maze[i][j] = new MazeCell(CellType.PATH);
             }
-        }
-    }
-
-    private void printMaze() {
-        for (int i = 0; i < dimensions[0]; i++) {
-            for (int j = 0; j < dimensions[1]; j++) {
-                if (maze[i][j].getType() == CellType.WALL) {
-                    System.out.print("#");
-                } else {
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
         }
     }
 }

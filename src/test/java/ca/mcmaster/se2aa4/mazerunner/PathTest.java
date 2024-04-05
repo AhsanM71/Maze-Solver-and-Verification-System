@@ -9,15 +9,15 @@ import java.util.List;
 
 public class PathTest {
     @Test
-    void factorizedFormTest1() {
+    void canonicalToFactorizedTest1() {
         Path path = new Path("FFFRRRLLLFLFLRFRFFFF");
         assertEquals("3F 3R 3L F L F L R F R 4F ", path.canonicalToFactorized());
     }
 
     @Test
-    void factorizedFormTest2() {
-        Path path = new Path("FFFFFFFFFFFFFFRRRRRRRRRRRRRR");
-        assertEquals("14F 14R ", path.canonicalToFactorized());
+    void factorizedToCanonicalTest() {
+        Path path = new Path("14F 14R");
+        assertEquals("FFFFFFFFFFFFFFRRRRRRRRRRRRRR", path.factorizedToCanonical());
     }
 
     @Test
@@ -32,7 +32,6 @@ public class PathTest {
         for (int i = 0; i < path.length(); i++) {
             assertEquals(correct.get(i), newPath.get(i));
         }
-
     }
 
 }
