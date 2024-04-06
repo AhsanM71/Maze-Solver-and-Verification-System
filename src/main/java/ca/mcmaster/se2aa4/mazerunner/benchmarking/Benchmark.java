@@ -51,7 +51,7 @@ public class Benchmark implements Perfomance {
         long startTime = System.nanoTime();
 
         Maze maze = new Maze(fileInput);
-
+        maze.buildMaze();
         long endTime = System.nanoTime();
         long duration = endTime - startTime;
 

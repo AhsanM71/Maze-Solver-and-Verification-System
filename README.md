@@ -2,7 +2,7 @@
 
 # Assignment A1 - Maze Runner
 
-- **Student**: [FIRSTNAME LASTNAME](MACID@mcmaster.ca)
+- **Student**: [Ahsan Muzammil](muzammia@mcmaster.ca)
 - **Program**: B. Eng. In Software Engineering
 - **Course code**: SFWRENG 2AA4
 - **Course Title**: Software Design I - Introduction to Software Development
@@ -81,10 +81,12 @@ The delivered program at the end of this assignment should use the following fla
 
 - `-i MAZE_FILE`: specifies the filename to be used;
 - `-p PATH_SEQUENCE`: activates the path verification mode to validate that PATH_SEQUENCE is correct for the maze
+- `-m PREFERRED_METHOD`: activates the maze solving mode to solve the maze with PREFERRED_METHOD
+- `-b BENCHMARK_MODE`: activates the benchmarking mode where when combined with -m and -b flag the program runs BENCHMARK_MODE
 
 If you are also delivering the bonus, your program will react to a third flag:
 
-- `-method {tremaux, righthand}`: specifies which path computation method to use. (default is right hand)
+- `-method {BFS, righthand}`: specifies which path computation method to use. (default is right hand)
 
 #### Examples
 
@@ -109,5 +111,16 @@ If a given path is incorrect, the program prints the message `incorrect path` on
 ```
 mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 3F
 inccorrect path
+mosser@azrael A1-Template %
+```
+
+If in benchmark mode, the program prints the message for results of the benchmark on the standard output.
+
+```
+mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/giant.maz.txt -m BFS -b righthand
+Execution time for Loading the maze: 2.4 milliseconds
+Execution time using method BFS for Exploring the maze: 28.64 milliseconds
+Execution time using method righthand for Exploring the maze: 7.16 milliseconds
+The Speedup result: 75.88
 mosser@azrael A1-Template %
 ```
