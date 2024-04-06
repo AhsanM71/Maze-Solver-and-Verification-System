@@ -1,7 +1,5 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,6 +20,7 @@ public class Main {
         config.getPaths(args);
         String input = config.getInput();
         Maze maze = new Maze(input);
+        maze.buildMaze();
 
         try {
             solution.runMazeSolver(config, maze, verify);

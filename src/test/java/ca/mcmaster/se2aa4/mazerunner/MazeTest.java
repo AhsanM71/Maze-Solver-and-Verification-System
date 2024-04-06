@@ -2,7 +2,6 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +15,7 @@ public class MazeTest {
     @BeforeEach
     public void setUp() {
         maze = new Maze("./examples/tiny.maz.txt");
+        maze.buildMaze();
     }
 
     @Test
@@ -27,13 +27,13 @@ public class MazeTest {
     @Test
     public void findStartPosTest() {
         Position start = maze.findStartPos();
-        assertTrue(start.equals(new Position(0, 5)));
+        assertEquals(new Position(0, 5), start);
     }
 
     @Test
     public void findEndPosTest() {
         Position end = maze.findEndPos();
-        assertTrue(end.equals(new Position(6, 1)));
+        assertEquals(new Position(6, 1), end);
     }
 
 }

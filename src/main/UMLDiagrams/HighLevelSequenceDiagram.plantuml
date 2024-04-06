@@ -2,17 +2,30 @@
 
     participant Main
     participant Configuration
+    participant Maze
+    participant MazeBuilder
     participant AlgorithmFactory
     participant Performance
     participant RHRuleSol
     participant BFSSol
     participant PathVerifier
     
+    activate Main
     Main --> Configuration: getPaths(args) 
     activate Configuration
     Main <-- Configuration: return paths
     deactivate Configuration
 
+    Main --> Maze: buildMaze()
+    activate Maze
+    
+    Maze --> MazeBuilder: renderMaze()
+    activate MazeBuilder
+    Maze --> MazeBuilder: getMaze()
+    Maze <-- MazeBuilder: return copyOfMaze
+    deactivate MazeBuilder
+    Main <-- Maze: 
+    deactivate Maze
 
     Main --> AlgorithmFactory ++: runMazeSolver(paths, maze, verify)
     activate AlgorithmFactory
@@ -49,6 +62,7 @@
 
     Main <-- AlgorithmFactory
     deactivate AlgorithmFactory
+    deactivate Main
 
     ' group loop [command != stop] 
     ' -> Explorer: takeDecision()

@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Configuration {
     private final Logger logger = LogManager.getLogger();
-    private List<String> paths = new ArrayList<>();;
+    private List<String> paths = new ArrayList<>();
     private Options options;
 
     public Configuration() {

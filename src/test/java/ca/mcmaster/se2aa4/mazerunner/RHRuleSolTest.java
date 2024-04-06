@@ -15,6 +15,7 @@ public class RHRuleSolTest {
         PathFinder rhRule = new RHRuleSol();
         Path p = new Path("");
         Maze maze = new Maze("./examples/tiny.maz.txt");
+        maze.buildMaze();
         Path path = rhRule.mazeSolver(maze, p);
         assertEquals("5F 2L 2F R 2F R 2F 2L 2F R 2F R 3F ", path.canonicalToFactorized());
     }
@@ -24,6 +25,7 @@ public class RHRuleSolTest {
         PathFinder rhRule = new RHRuleSol();
         Path p = new Path("");
         Maze maze = new Maze("./examples/direct.maz.txt");
+        maze.buildMaze();
         Path path = rhRule.mazeSolver(maze, p);
         assertEquals("F R 2F L 3F R F L F R F L 2F ", path.canonicalToFactorized());
     }

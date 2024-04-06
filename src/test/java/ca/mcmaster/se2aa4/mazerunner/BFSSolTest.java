@@ -13,6 +13,7 @@ public class BFSSolTest {
     void mazeSolverTest1() {
         PathFinder bfs = new BFSSol();
         Maze maze = new Maze("./examples/tiny.maz.txt");
+        maze.buildMaze();
         Path format = new Path("null");
         Path path = bfs.mazeSolver(maze, format);
         assertEquals("3F L 4F R 3F ", path.canonicalToFactorized());
@@ -22,6 +23,7 @@ public class BFSSolTest {
     void mazeSolverTest2() {
         PathFinder bfs = new BFSSol();
         Maze maze = new Maze("./examples/giant.maz.txt");
+        maze.buildMaze();
         Path format = new Path("null");
         Path path = bfs.mazeSolver(maze, format);
         String correct = "F L 2F R 2F L 6F R 2F L 6F R 2F R 2F L 2F R 2F L 2F R 8F L 4F R 4F L 6F R 2F L 4F R 2F L 2F R 4F L 4F R 2F L 18F R 4F L 4F R 2F L 2F R 2F L 4F R 4F L 2F R 2F L 2F L 2F R 4F L 2F R 4F L 2F R 10F L 6F R 2F L 2F R 6F L 2F R 2F R 4F L 2F R 2F L 14F R 4F L 4F R 2F L 2F R 8F L 10F R 2F L 4F R 2F L 6F R 2F L 4F R 2F L 6F L 2F R 2F L 4F R 5F ";
