@@ -39,7 +39,7 @@ public class VerifyPath implements PathVerifier {
 
     // This helper function actually checks the user inputted path
     private boolean pathVerifier(Path p, Maze maze, Boolean isValid, Player runner) {
-        String path = p.getPath().toUpperCase();
+        String path = p.factorizedToCanonical().toUpperCase();
         boolean flag = true;
         for (int i = 0; i < path.length(); i++) {
             try {
