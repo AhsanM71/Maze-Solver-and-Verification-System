@@ -31,7 +31,7 @@ package benchmarking{
 
 package factory{
     interface AlgorithmFactory{
-        + runMazeSolver(paths: List<String>, maze: Maze, verify: PathVerifier): void
+        + runMazeSolver(config: Configuration, maze: Maze, verify: PathVerifier): void
     }
     class SolveFactory{
         + runMazeSolver(): void
@@ -49,6 +49,7 @@ package maze{
         + getMaze(): MazeCell[][]
     }
     class Maze{
+        + buildMaze(): void
         + isPathValid(col: int, row: int): boolean
         + findStartPos(): Position
         + findEndPos(): Position
@@ -73,7 +74,6 @@ package runner{
     }
     class Position{
         + equals(obj: Object): boolean
-        + hashCode(): int
     }
     class Runner
 }
@@ -88,7 +88,7 @@ package verification {
 }
 
 class Configuration{
-    + getPaths(args: String[]): List<String>
+    + getPaths(args: String[]): void
 }
 
 class Main
