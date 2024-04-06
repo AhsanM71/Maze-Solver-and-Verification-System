@@ -16,12 +16,7 @@ package algorithms{
     class BFSSol
 
     interface PathFinder{
-        + mazeSolver(maze: Maze, format: PathFormatter): String 
-    }
-
-    class PathFormatter {
-        + factorizedForm(path: ArrayList<String>): String
-        + strToList(path: String): List<String>
+        + mazeSolver(maze: Maze, format: Path): String 
     }
 }
 
@@ -36,7 +31,7 @@ package benchmarking{
 
 package factory{
     interface AlgorithmFactory{
-        + runMazeSolver(paths: List<String>, maze: Maze, verify: PathVerifier): void
+        + runMazeSolver(config: Configuration, maze: Maze, verify: PathVerifier): void
     }
     class SolveFactory{
         + runMazeSolver(): void
@@ -54,6 +49,7 @@ package maze{
         + getMaze(): MazeCell[][]
     }
     class Maze{
+        + buildMaze(): void
         + isPathValid(col: int, row: int): boolean
         + findStartPos(): Position
         + findEndPos(): Position
@@ -78,31 +74,37 @@ package runner{
     }
     class Position{
         + equals(obj: Object): boolean
-        + hashCode(): int
     }
     class Runner
 }
 
-package path {
+package verification {
     class VerifyPath
 
     interface PathVerifier{
-        + VerifyGivenPath(maze: Maze, path: String): boolean
+        + VerifyGivenPath(maze: Maze, p: Path): boolean
     }
 
 }
 
 class Configuration{
-    + getPaths(args: String[]): List<String>
+    + getPaths(args: String[]): void
 }
 
 class Main
 
+class Path {
+    + factorizedToCanonical(): String
+    + canonicalToFactorized(): String
+    + strToList(path: String): List<String>
+    + listToStr(path: List<String>): String
+}
+
 ' algorithms:
 PathFinder <|.. RHRuleSol
 PathFinder <|.. BFSSol
-PathFormatter -up-> BFSSol
-PathFormatter -up-> RHRuleSol
+Path -right-> BFSSol
+Path -up-> RHRuleSol
 
 ' maze:
 FileProcessor <|.. MazeBuilder
@@ -112,30 +114,33 @@ MazeCell <-- CellType
 
 ' runner:
 Player <|.. Runner
-Runner <-- Direction
-Runner <-- Position
+Runner <-left- Direction
+Runner <-right- Position
 
 ' path:
 PathVerifier <|.. VerifyPath
 
 ' factory:
-SolveFactory .left.|> AlgorithmFactory
+SolveFactory ..left..|> AlgorithmFactory
 
 ' benchmarking:
 Benchmark .up.|> Performance
 
-Main *--left--> AlgorithmFactory
-Main *--down-> PathVerifier
+Main *-left-> AlgorithmFactory
+Main *-down-> PathVerifier
 Main *-left-> Configuration
-Main ---> Maze
+Main *--> Maze
 
-SolveFactory *-right-> Performance
+SolveFactory *--right--> Performance
 SolveFactory *--> PathFinder
-SolveFactory o--> PathFormatter
+SolveFactory o--> Path
 
-VerifyPath *--> Player
+VerifyPath *---> Player
+VerifyPath --right-> Path
 
 RHRuleSol *-left-> Player
-BFSSol *--left--> Player
-BFSSol o--right--> Position
+BFSSol *-down-> Player
+BFSSol o-right-> Position
+
+Benchmark --> Path
 @enduml

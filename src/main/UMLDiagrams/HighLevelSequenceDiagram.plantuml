@@ -2,17 +2,30 @@
 
     participant Main
     participant Configuration
+    participant Maze
+    participant MazeBuilder
     participant AlgorithmFactory
     participant Performance
     participant RHRuleSol
     participant BFSSol
     participant PathVerifier
     
+    activate Main
     Main --> Configuration: getPaths(args) 
     activate Configuration
     Main <-- Configuration: return paths
     deactivate Configuration
 
+    Main --> Maze: buildMaze()
+    activate Maze
+    
+    Maze --> MazeBuilder: renderMaze()
+    activate MazeBuilder
+    Maze --> MazeBuilder: getMaze()
+    Maze <-- MazeBuilder: return copyOfMaze
+    deactivate MazeBuilder
+    Main <-- Maze: 
+    deactivate Maze
 
     Main --> AlgorithmFactory ++: runMazeSolver(paths, maze, verify)
     activate AlgorithmFactory
@@ -49,48 +62,5 @@
 
     Main <-- AlgorithmFactory
     deactivate AlgorithmFactory
-
-    ' group loop [command != stop] 
-    ' -> Explorer: takeDecision()
-
-    ' Explorer -> Search ++: performSearch()
-
-    ' Search -> Phase  ++: isLastPhase()
-    ' Search <- Phase: return last
-
-    ' Search -> Phase: isFinished()
-    ' Search <- Phase : return finished
-
-    ' Search -> Phase: [finished = true] getNextPhase()
-    ' Search <-- Phase: return phase
-
-    ' Search -> Phase : getDroneCommand()
-    ' Search <-- Phase : return command
-
-    ' Explorer <-- Search: return command
-
-    ' <-- Explorer: return command
-
-    ' -> Explorer: acknowledgeResults(s: String)
-
-    ' Explorer -> Search: readResponse(response: JSONObject, map: Map)
-
-    ' Search -> Phase: processInfo(response: JSONObject)
-    ' Search <-- Phase --
-
-    ' Search -> Map ++: addPOI()
-    ' Search <-- Map --
-
-    ' Explorer <-- Search --
-
-    ' <-- Explorer
-    ' end
-
-    ' -> Explorer: deliverFinalReport()
-
-    ' Explorer -> Report ++: generateReport(map: Map)
-    ' Explorer <-- Report --: return report
-
-    ' <-- Explorer: return report
-
+    deactivate Main
 @enduml
