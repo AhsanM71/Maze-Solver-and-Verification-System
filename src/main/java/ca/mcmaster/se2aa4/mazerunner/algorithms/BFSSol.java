@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
+import ca.mcmaster.se2aa4.mazerunner.Path;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.runner.Direction;
 import ca.mcmaster.se2aa4.mazerunner.runner.Player;
@@ -18,7 +19,7 @@ import ca.mcmaster.se2aa4.mazerunner.runner.Runner;
 
 public class BFSSol implements PathFinder {
 
-    public String mazeSolver(Maze maze, PathFormatter format) {
+    public Path mazeSolver(Maze maze, Path format) {
         int cols = maze.getMazeCSize();
         int rows = maze.getMazeRSize();
         Set<Position> visited = new HashSet<>();
@@ -63,7 +64,7 @@ public class BFSSol implements PathFinder {
                 && !visited.contains(neighbour);
     }
 
-    private String shortestPath(List<Position> path, Direction prevDir, PathFormatter format) {
+    private Path shortestPath(List<Position> path, Direction prevDir, Path format) {
         List<Direction> directions = new ArrayList<>();
         for (int i = 1; i < path.size(); i++) {
             Position prev = path.get(i - 1);
@@ -84,7 +85,7 @@ public class BFSSol implements PathFinder {
         return converter(directions, prevDir, format);
     }
 
-    private String converter(List<Direction> directions, Direction prevDir, PathFormatter format) {
+    private Path converter(List<Direction> directions, Direction prevDir, Path format) {
         StringBuilder sp = new StringBuilder();
         for (int i = 0; i < directions.size(); i++) {
             Direction dir = directions.get(i);
@@ -100,6 +101,7 @@ public class BFSSol implements PathFinder {
                 }
             }
         }
-        return format.factorizedForm(format.strToList(sp.toString()));
+        format.setPath(sp.toString());
+        return format;
     }
 }

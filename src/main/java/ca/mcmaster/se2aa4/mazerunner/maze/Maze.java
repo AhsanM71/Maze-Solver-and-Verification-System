@@ -5,8 +5,13 @@ import ca.mcmaster.se2aa4.mazerunner.runner.Position;
 public class Maze {
     private MazeCell[][] maze;
     private FileProcessor builder;
+    private String fileName;
 
     public Maze(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void buildMaze() {
         builder = new MazeBuilder(fileName, maze);
         builder.renderMaze();
         maze = builder.getMaze();

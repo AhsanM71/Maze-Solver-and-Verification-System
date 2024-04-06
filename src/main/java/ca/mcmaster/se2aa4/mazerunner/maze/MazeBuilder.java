@@ -26,22 +26,23 @@ public class MazeBuilder implements FileProcessor {
             initialize();
             builder();
         } catch (Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
+            logger.error("/!\\ An error has occured /!\\ ");
         }
     }
 
     public int[] mazeDimension() throws IOException {
         int[] size = new int[2];
+
         reader = new BufferedReader(new FileReader(fileName));
         String line;
-        int col = 0;
         int rows = 0;
+        int col = 0;
         while ((line = reader.readLine()) != null) {
             col = line.length();
             rows++;
         }
-        size[0] = col;
-        size[1] = rows;
+        size[0] = rows;
+        size[1] = col;
         reader.close();
         return size;
     }
@@ -62,14 +63,13 @@ public class MazeBuilder implements FileProcessor {
             if (line.charAt(col) == '#') {
                 maze[row][col].setType(CellType.WALL);
             }
-
         }
     }
 
     public MazeCell[][] getMaze() {
         MazeCell[][] copy = new MazeCell[maze.length][maze[0].length];
         for (int i = 0; i < copy.length; i++) {
-            for (int j = 0; j < copy.length; j++) {
+            for (int j = 0; j < copy[0].length; j++) {
                 copy[i][j] = maze[i][j];
             }
         }
