@@ -11,7 +11,7 @@ public class PathTest {
     @Test
     void canonicalToFactorizedTest() {
         Path path = new Path("FFFRRRLLLFLFLRFRFFFF");
-        assertEquals("3F 3R 3L F L F L R F R 4F ", path.canonicalToFactorized());
+        assertEquals("3F 3R 3L F L F L R F R 4F", path.canonicalToFactorized());
     }
 
     @Test

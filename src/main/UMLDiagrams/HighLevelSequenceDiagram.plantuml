@@ -11,27 +11,28 @@
     participant PathVerifier
     
     activate Main
-    Main --> Configuration: getPaths(args) 
+    Main -> Configuration: getPaths(args) 
     activate Configuration
     Main <-- Configuration: return paths
     deactivate Configuration
 
-    Main --> Maze: buildMaze()
+    Main -> Maze: buildMaze()
     activate Maze
     
-    Maze --> MazeBuilder: renderMaze()
+    Maze -> MazeBuilder: renderMaze()
     activate MazeBuilder
-    Maze --> MazeBuilder: getMaze()
+    Maze <-- MazeBuilder:
+    Maze -> MazeBuilder: getMaze()
     Maze <-- MazeBuilder: return copyOfMaze
     deactivate MazeBuilder
     Main <-- Maze: 
     deactivate Maze
 
-    Main --> AlgorithmFactory ++: runMazeSolver(paths, maze, verify)
+    Main -> AlgorithmFactory ++: runMazeSolver(paths, maze, verify)
     activate AlgorithmFactory
     group alt (!baseline.equals("null"))
 
-    AlgorithmFactory --> Performance: runPerformance()
+    AlgorithmFactory -> Performance: runPerformance()
     activate Performance
 
     AlgorithmFactory <-- Performance
@@ -39,22 +40,22 @@
     else path.equals("null")
 
     group alt (method.equals("righthand"))
-    AlgorithmFactory --> AlgorithmFactory: runMethod(rightHandRule, maze, format)
-    AlgorithmFactory --> RHRuleSol: mazeSolver(maze, format)
+    AlgorithmFactory -> AlgorithmFactory: runMethod(rightHandRule, maze, format)
+    AlgorithmFactory -> RHRuleSol: mazeSolver(maze, format)
     activate RHRuleSol
     AlgorithmFactory <-- RHRuleSol: return path
     deactivate RHRuleSol
 
     else method.equals("BFS")
-    AlgorithmFactory --> AlgorithmFactory: runMethod(bfs, maze, format)
-    AlgorithmFactory --> BFSSol: mazeSolver(maze, format)
+    AlgorithmFactory -> AlgorithmFactory: runMethod(bfs, maze, format)
+    AlgorithmFactory -> BFSSol: mazeSolver(maze, format)
     activate BFSSol
     AlgorithmFactory <-- BFSSol: return path
     deactivate BFSSol
     end
     else 
 
-    AlgorithmFactory --> PathVerifier: verifyGivenPath(maze, path)
+    AlgorithmFactory -> PathVerifier: verifyGivenPath(maze, path)
     activate PathVerifier
     AlgorithmFactory <-- PathVerifier: return flag
     deactivate PathVerifier

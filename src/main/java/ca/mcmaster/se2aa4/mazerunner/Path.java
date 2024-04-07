@@ -53,7 +53,7 @@ public class Path {
             // Append the last character to the String.
             sb.append(path.charAt(path.length() - 1));
         }
-        return sb.toString();
+        return sb.toString().replaceAll("\\s+$", "");
     }
 
     public String canonicalToFactorized() {
@@ -82,7 +82,7 @@ public class Path {
                 count = 1;
             }
         }
-        return sb.toString();
+        return sb.toString().replaceAll("\\s+$", "");
     }
 
     public List<String> strToList(String path) {
