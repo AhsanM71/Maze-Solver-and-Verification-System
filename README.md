@@ -90,10 +90,18 @@ If you are also delivering the bonus, your program will react to a third flag:
 
 #### Examples
 
-When no logs are activated, the programs only print the computed path on the standard output.
+When no logs are activated or no -m preferred method is provided, the programs only print the computed path on the standard output using righthand rule.
 
 ```
 mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt
+4F
+mosser@azrael A1-Template %
+```
+
+When no logs are activated and a -m preferred method is provided, the programs only print the computed path on the standard output using the preferred method.
+
+```
+mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -m BFS
 4F
 mosser@azrael A1-Template %
 ```
