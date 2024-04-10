@@ -1,6 +1,6 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/8jM7fhXE)
 
-# Assignment A1 - Maze Runner
+# Assignment A3 - Maze Runner
 
 - **Student**: [Ahsan Muzammil](muzammia@mcmaster.ca)
 - **Program**: B. Eng. In Software Engineering
@@ -34,7 +34,7 @@ This program explores a maze, finding a path from an entry point to an exit one.
 To build the program, simply package it with Maven:
 
 ```
-mosser@azrael A1-Template % mvn -q clean package
+mosser@azrael A3-Template % mvn -q clean package
 ```
 
 ### Provided version (starter code)
@@ -42,7 +42,7 @@ mosser@azrael A1-Template % mvn -q clean package
 The starter code assumes the maze file name is the first argument.
 
 ```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar ./examples/small.maz.txt
+mosser@azrael A3-Template % java -jar target/mazerunner.jar ./examples/small.maz.txt
 ** Starting Maze Runner
 **** Reading the maze from file ./examples/small.maz.txt
 WALL WALL WALL WALL WALL WALL WALL WALL WALL WALL WALL
@@ -64,7 +64,7 @@ PATH NOT COMPUTED
 When called on a non-existing file. it prints an error message
 
 ```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar ./examples/small.maz.txt
+mosser@azrael A3-Template % java -jar target/mazerunner.jar ./examples/small.maz.txt
 ** Starting Maze Runner
 **** Reading the maze from file ./examples/small.maz.txtd
 /!\ An error has occured /!\
@@ -93,42 +93,42 @@ If you are also delivering the bonus, your program will react to a third flag:
 When no logs are activated or no -m preferred method is provided, the programs only print the computed path on the standard output using righthand rule.
 
 ```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt
+mosser@azrael A3-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt
 4F
-mosser@azrael A1-Template %
+mosser@azrael A3-Template %
 ```
 
 When no logs are activated and a -m preferred method is provided, the programs only print the computed path on the standard output using the preferred method.
 
 ```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -m BFS
+mosser@azrael A3-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -m BFS
 4F
-mosser@azrael A1-Template %
+mosser@azrael A3-Template %
 ```
 
 If a given path is correct, the program prints the message `correct path` on the standard output.
 
 ```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 4F
+mosser@azrael A3-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 4F
 correct path
-mosser@azrael A1-Template %
+mosser@azrael A3-Template %
 ```
 
 If a given path is incorrect, the program prints the message `incorrect path` on the standard output.
 
 ```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 3F
+mosser@azrael A3-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 3F
 inccorrect path
-mosser@azrael A1-Template %
+mosser@azrael A3-Template %
 ```
 
 If in benchmark mode, the program prints the message for results of the benchmark on the standard output.
 
 ```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/giant.maz.txt -m BFS -b righthand
+mosser@azrael A3-Template % java -jar target/mazerunner.jar -i ./examples/giant.maz.txt -m BFS -b righthand
 Execution time for Loading the maze: 2.4 milliseconds
 Execution time using method BFS for Exploring the maze: 28.64 milliseconds
 Execution time using method righthand for Exploring the maze: 7.16 milliseconds
 The Speedup result: 75.88
-mosser@azrael A1-Template %
+mosser@azrael A3-Template %
 ```
