@@ -9,9 +9,15 @@ import java.util.List;
 
 public class PathTest {
     @Test
-    void canonicalToFactorizedTest() {
+    void canonicalToFactorizedTest1() {
         Path path = new Path("FFFRRRLLLFLFLRFRFFFF");
         assertEquals("3F 3R 3L F L F L R F R 4F", path.canonicalToFactorized());
+    }
+
+    @Test
+    void canonicalToFactorizedTest2() {
+        Path path = new Path("FLRFLRFLRFLRFLRFLRFFF");
+        assertEquals("F L R F L R F L R F L R F L R F L R 3F", path.canonicalToFactorized());
     }
 
     @Test
